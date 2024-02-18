@@ -1,0 +1,44 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+  info [
+    "The model of the E-puck robot"
+  ]
+  title "E-puck simulation"
+}
+Viewpoint {
+  orientation -0.39360317655266464 0.42743872035944824 0.8138628138360479 1.497807820111495
+  position -0.6506629153083463 -2.4529782941739566 3.0698620225902697
+  follow "e-puck"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0.11 0 0
+  floorSize 2.438 4.877
+  floorTileSize 2.438 4.877
+  floorAppearance Appearance {
+    material Material {
+    }
+    texture ImageTexture {
+      url [
+        "../Webots/ArenaLowQuality.jpg"
+      ]
+      repeatS FALSE
+      repeatT FALSE
+      filtering 0
+    }
+  }
+}
+E-puck {
+  translation 0.03 -2.38898e-05 0
+  rotation 0 0 1 1.57
+  controller "e-puck"
+}
