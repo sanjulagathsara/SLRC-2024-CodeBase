@@ -8,6 +8,7 @@
 // <webots/DistanceSensor.hpp>, <webots/Motor.hpp>, etc.
 // and/or to add some other includes
 #include <webots/Robot.hpp>
+#include <webots/motor.hpp>
 
 // All the webots classes are defined in the "webots" namespace
 using namespace webots;
@@ -30,6 +31,16 @@ int main(int argc, char **argv) {
   // instance of a device of the robot. Something like:
   //  Motor *motor = robot->getMotor("motorname");
   //  DistanceSensor *ds = robot->getDistanceSensor("dsname");
+  Motor *left_motor = robot->getMotor("left_motor");
+  Motor *right_motor = robot->getMotor("right_motor");
+  
+  left_motor->setPosition(INFINITY);
+  right_motor->setPosition(INFINITY);
+  
+  left_motor->setVelocity(-6.28);
+  right_motor->setVelocity(-6.28);
+  
+  
   //  ds->enable(timeStep);
 
   // Main loop:
@@ -43,6 +54,10 @@ int main(int argc, char **argv) {
 
     // Enter here functions to send actuator commands, like:
     //  motor->setPosition(10.0);
+    
+    
+    
+    
   };
 
   // Enter here exit cleanup code.

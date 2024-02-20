@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation 0.2809630525569346 0.005080737426148906 -0.9597051365940976 3.3582923029759453
-  position 1.9915131418993366 0.05179710103018359 0.6674718005692607
+  orientation 0.19205405809683548 -0.13670894135537578 -0.9718157768435486 4.7996614948165846
+  position 1.1404642111526924 -0.5799145572145307 0.34676847246758963
 }
 TexturedBackground {
 }
@@ -60,13 +60,15 @@ Robot {
         }
         DEF left_wheel HingeJoint {
           jointParameters HingeJointParameters {
+            anchor 0 -0.06 -0.04
           }
           device [
             RotationalMotor {
+              name "left_motor"
             }
           ]
           endPoint Solid {
-            translation -0.09 -0.06 -0.04
+            translation -0.09000000000000008 -0.06000000000000005 -0.04
             rotation 0 -0.9999999999999999 0 1.5707953071795862
             children [
               DEF left_wheel_shape Shape {
@@ -86,13 +88,15 @@ Robot {
         }
         DEF right_wheel HingeJoint {
           jointParameters HingeJointParameters {
+            anchor 0 -0.06 -0.04
           }
           device [
             RotationalMotor {
+              name "right_motor"
             }
           ]
           endPoint Solid {
-            translation 0.09 -0.06 -0.0399955
+            translation 0.09 -0.06 -0.04
             rotation 1.4252501626753387e-07 -0.9999999999999796 -1.4367923625557603e-07 1.570795709917693
             children [
               DEF right_wheel_shape Shape {
@@ -123,6 +127,7 @@ Robot {
   ]
   physics Physics {
   }
+  controller "slrc24_controller"
   battery [
     0
   ]
