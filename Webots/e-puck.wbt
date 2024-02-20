@@ -3,7 +3,6 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
 
 WorldInfo {
   info [
@@ -12,9 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.39360317655266464 0.42743872035944824 0.8138628138360479 1.497807820111495
-  position -0.6506629153083463 -2.4529782941739566 3.0698620225902697
-  follow "e-puck"
+  orientation 0.4510243718140883 -0.0692191361838213 -0.8898234247398036 3.5706903244366646
+  position 1.7864840721840425 -0.022961532899218595 0.6459355356069387
 }
 TexturedBackground {
 }
@@ -37,8 +35,100 @@ RectangleArena {
     }
   }
 }
-E-puck {
-  translation 0.03 -2.38898e-05 0
-  rotation 0 0 1 1.57
-  controller "e-puck"
+Robot {
+  translation 1.17 0.18 0.07
+  rotation 0 0 1 1.5708
+  children [
+    DEF robot_body Group {
+      children [
+        Solid {
+          translation 0 0.08 -0.045
+          children [
+            DEF caster_shape Shape {
+              appearance PBRAppearance {
+              }
+              geometry Capsule {
+                height 0.03
+                radius 0.01
+              }
+            }
+          ]
+          name "caster_wheel"
+          boundingObject USE caster_shape
+          physics Physics {
+          }
+        }
+        DEF left_wheel HingeJoint {
+          jointParameters HingeJointParameters {
+            anchor 0 -0.06 -0.04
+          }
+          device [
+            RotationalMotor {
+              name "left_motor"
+            }
+          ]
+          endPoint Solid {
+            translation -0.09000000000000008 -0.06000000000000005 -0.04
+            rotation 0 -0.9999999999999999 0 1.5707953071795862
+            children [
+              DEF left_wheel_shape Shape {
+                appearance PBRAppearance {
+                  baseColor 0.127687 1 0.838727
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.03
+                }
+              }
+            ]
+            boundingObject USE left_wheel_shape
+            physics Physics {
+            }
+          }
+        }
+        DEF right_wheel HingeJoint {
+          jointParameters HingeJointParameters {
+            anchor 0 -0.06 -0.04
+          }
+          device [
+            RotationalMotor {
+              name "right_motor"
+            }
+          ]
+          endPoint Solid {
+            translation 0.09 -0.06 -0.04
+            rotation 1.4252501626753387e-07 -0.9999999999999796 -1.4367923625557603e-07 1.570795709917693
+            children [
+              DEF right_wheel_shape Shape {
+                appearance PBRAppearance {
+                  baseColor 0.127687 1 0.838727
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.03
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE right_wheel_shape
+            physics Physics {
+            }
+          }
+        }
+        DEF body_box Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.2 0.2 0.1
+          }
+        }
+      ]
+    }
+  ]
+  physics Physics {
+  }
+  controller "slrc24_controller"
+  battery [
+    0
+  ]
 }
