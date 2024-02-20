@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation 0.33833806766938457 0.06079968525100531 -0.9390584381385035 3.0121765378222682
-  position 5.363141189238739 -0.7757799546351787 4.978684904841154
+  orientation -0.33471942934509247 -0.008125341221059247 0.9422828038592963 2.9770183253066773
+  position 4.03039741990848 -0.9732269575373773 3.1838687242490016
 }
 TexturedBackground {
 }
@@ -33,6 +33,106 @@ RectangleArena {
       repeatT FALSE
       filtering 0
     }
+  }
+}
+Solid {
+  translation 0.89 0.94 0.03
+  children [
+    DEF metal_box_shape Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "metal_box"
+  boundingObject USE metal_box_shape
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.01 -1.82 0.03
+  children [
+    DEF metal_box_shape Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "metal_box2"
+  boundingObject USE metal_box_shape
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.39 -1.44 0.02
+  children [
+    DEF non_metal_box Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "non_metal_box"
+  boundingObject USE non_metal_box
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.36 -1.44 0.02
+  children [
+    DEF non_metal_box Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "non_metal_box2"
+  boundingObject USE non_metal_box
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.52 0.56 0.02
+  children [
+    DEF non_metal_box Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "non_metal_box3"
+  boundingObject USE non_metal_box
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.52 1.32 0.02
+  children [
+    DEF non_metal_box Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.05 0.05 0.05
+      }
+    }
+  ]
+  name "non_metal_box4"
+  boundingObject USE non_metal_box
+  physics Physics {
   }
 }
 Robot {
@@ -133,7 +233,7 @@ Robot {
   ]
 }
 Solid {
-  translation 0.69 -1.91 0.09
+  translation 0.69 -1.91 0.08
   children [
     DEF pose1_cylinder_shape Shape {
       appearance PBRAppearance {
@@ -151,7 +251,7 @@ Solid {
   }
 }
 Solid {
-  translation -0.64 -1.89 0.1
+  translation -0.64 -1.89 0.08
   children [
     DEF pose2_cuboid_shape Shape {
       appearance PBRAppearance {
