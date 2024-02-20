@@ -3,7 +3,6 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
 
 WorldInfo {
   info [
@@ -12,9 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.2573676772697926 0.796368729179416 0.5473195829512351 0.500986110429909
-  position 0.39733417384128794 -0.6276896140856928 0.3540931171912154
-  follow "e-puck"
+  orientation 0.2809630525569346 0.005080737426148906 -0.9597051365940976 3.3582923029759453
+  position 1.9915131418993366 0.05179710103018359 0.6674718005692607
 }
 TexturedBackground {
 }
@@ -37,20 +35,16 @@ RectangleArena {
     }
   }
 }
-E-puck {
-  translation 0.03047190063953785 0.3863207663876035 -6.396123904104344e-05
-  rotation 9.598758389689778e-05 -9.741294179404315e-05 0.999999990648551 1.5650823084132324
-  controller "e-puck"
-}
 Robot {
-  translation 1.11 -0.4 0.07
+  translation 1.17 0.19 0.07
+  rotation 0 0 1 1.5708
   children [
     DEF robot_body Group {
       children [
         Solid {
-          translation 0 0.08 -0.05
+          translation 0 0.08 -0.045
           children [
-            Shape {
+            DEF caster_shape Shape {
               appearance PBRAppearance {
               }
               geometry Capsule {
@@ -60,6 +54,9 @@ Robot {
             }
           ]
           name "caster_wheel"
+          boundingObject USE caster_shape
+          physics Physics {
+          }
         }
         DEF left_wheel HingeJoint {
           jointParameters HingeJointParameters {
@@ -70,9 +67,9 @@ Robot {
           ]
           endPoint Solid {
             translation -0.09 -0.06 -0.04
-            rotation 0 1 0 -1.5707953071795862
+            rotation 0 -0.9999999999999999 0 1.5707953071795862
             children [
-              Shape {
+              DEF left_wheel_shape Shape {
                 appearance PBRAppearance {
                   baseColor 0.127687 1 0.838727
                 }
@@ -82,6 +79,9 @@ Robot {
                 }
               }
             ]
+            boundingObject USE left_wheel_shape
+            physics Physics {
+            }
           }
         }
         DEF right_wheel HingeJoint {
@@ -92,10 +92,10 @@ Robot {
             }
           ]
           endPoint Solid {
-            translation 0.09 -0.06 -0.04
-            rotation 0 1 0 -1.5707953071795862
+            translation 0.09 -0.06 -0.0399955
+            rotation 1.4252501626753387e-07 -0.9999999999999796 -1.4367923625557603e-07 1.570795709917693
             children [
-              Shape {
+              DEF right_wheel_shape Shape {
                 appearance PBRAppearance {
                   baseColor 0.127687 1 0.838727
                 }
@@ -106,6 +106,9 @@ Robot {
               }
             ]
             name "solid(1)"
+            boundingObject USE right_wheel_shape
+            physics Physics {
+            }
           }
         }
         DEF body_box Shape {
@@ -117,5 +120,10 @@ Robot {
         }
       ]
     }
+  ]
+  physics Physics {
+  }
+  battery [
+    0
   ]
 }
