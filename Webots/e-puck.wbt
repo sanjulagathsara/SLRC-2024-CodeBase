@@ -12,8 +12,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.39360317655266464 0.42743872035944824 0.8138628138360479 1.497807820111495
-  position -0.6506629153083463 -2.4529782941739566 3.0698620225902697
+  orientation -0.2573676772697926 0.796368729179416 0.5473195829512351 0.500986110429909
+  position 0.39733417384128794 -0.6276896140856928 0.3540931171912154
   follow "e-puck"
 }
 TexturedBackground {
@@ -38,7 +38,84 @@ RectangleArena {
   }
 }
 E-puck {
-  translation 0.03 -2.38898e-05 0
-  rotation 0 0 1 1.57
+  translation 0.03047190063953785 0.3863207663876035 -6.396123904104344e-05
+  rotation 9.598758389689778e-05 -9.741294179404315e-05 0.999999990648551 1.5650823084132324
   controller "e-puck"
+}
+Robot {
+  translation 1.11 -0.4 0.07
+  children [
+    DEF robot_body Group {
+      children [
+        Solid {
+          translation 0 0.08 -0.05
+          children [
+            Shape {
+              appearance PBRAppearance {
+              }
+              geometry Capsule {
+                height 0.03
+                radius 0.01
+              }
+            }
+          ]
+          name "caster_wheel"
+        }
+        DEF left_wheel HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+            }
+          ]
+          endPoint Solid {
+            translation -0.09 -0.06 -0.04
+            rotation 0 1 0 -1.5707953071795862
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.127687 1 0.838727
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.03
+                }
+              }
+            ]
+          }
+        }
+        DEF right_wheel HingeJoint {
+          jointParameters HingeJointParameters {
+          }
+          device [
+            RotationalMotor {
+            }
+          ]
+          endPoint Solid {
+            translation 0.09 -0.06 -0.04
+            rotation 0 1 0 -1.5707953071795862
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.127687 1 0.838727
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.03
+                }
+              }
+            ]
+            name "solid(1)"
+          }
+        }
+        DEF body_box Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.2 0.2 0.1
+          }
+        }
+      ]
+    }
+  ]
 }
