@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation 0.4510243718140883 -0.0692191361838213 -0.8898234247398036 3.5706903244366646
-  position 1.7864840721840425 -0.022961532899218595 0.6459355356069387
+  orientation 0.33833806766938457 0.06079968525100531 -0.9390584381385035 3.0121765378222682
+  position 5.363141189238739 -0.7757799546351787 4.978684904841154
 }
 TexturedBackground {
 }
@@ -131,4 +131,39 @@ Robot {
   battery [
     0
   ]
+}
+Solid {
+  translation 0.69 -1.91 0.09
+  children [
+    DEF pose1_cylinder_shape Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.15
+        radius 0.03
+      }
+    }
+  ]
+  name "pose1_cylinder"
+  boundingObject USE pose1_cylinder_shape
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.64 -1.89 0.1
+  children [
+    DEF pose2_cuboid_shape Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.07 0.07 0.15
+      }
+    }
+  ]
+  name "pose2_cuboid"
+  boundingObject USE pose2_cuboid_shape
+  physics Physics {
+  }
 }
