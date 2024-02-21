@@ -51,7 +51,11 @@ int main(int argc, char **argv) {
   lineSensor7->enable(timeStep);
   
   double lineSensor[8];
-  bool lineVal[8];
+  bool lineV[8];
+  float pVal;
+  float Kp = 10;
+  
+  int error = 0;
 
 
   std::cout << "Hello World!" << std::endl;
@@ -77,20 +81,98 @@ int main(int argc, char **argv) {
     
     for(int i=0;i<8;i++){
       if(lineSensor[i] < 500){
-        lineVal[i] = 1;
+        lineV[i] = 1;
       }
       else{
-        lineVal[i] = 0;
+        lineV[i] = 0;
       }
     }
     
-    cout<<lineVal[0]<<" "<<lineVal[1]<<" "<<lineVal[2]<<" "<<lineVal[3]<<" "<<lineVal[4]<<" "<<lineVal[5]<<" "<<lineVal[6]<<" "<<lineVal[7]<<endl;
+    //cout<<lineV[0]<<" "<<lineV[1]<<" "<<lineV[2]<<" "<<lineV[3]<<" "<<lineV[4]<<" "<<lineV[5]<<" "<<lineV[6]<<" "<<lineV[7]<<endl;
+    
+
+    
+    if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
+      error = 0;
+    }
+    else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
+    error = -2;
+    }
+    else if( lineV[0] == 0 && lineV[1] == 1 && lineV[2] == 1 && lineV[3] == 0 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
+    error = -3;
+    }
+    else if( lineV[0] == 1 && lineV[1] == 1 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
+    error = -4;
+    }
+    else if( lineV[0] == 1 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
+    error = -5;
+    }
+    else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 0 && lineV[7] == 0 ){
+    error = 2;
+    }
+    else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 0 && lineV[5] == 1 && lineV[6] == 1 && lineV[7] == 0 ){
+    error = 3;
+    }
+    else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 1 && lineV[7] == 1 ){
+    error = 4;
+    }
+    else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 1 ){
+    error = 5;
+    }
+    else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 1 && lineV[7] == 1 ){
+    error = 10;
+    }
+    else if( lineV[0] == 1 && lineV[1] == 1 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
+    error = -10;
+    }
+    else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 1 && lineV[7] == 1 ){
+    error = 10;
+    }
+    else if( lineV[0] == 1 && lineV[1] == 1 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
+    error = -10;
+    }
+    else{
+    error = 0;
+    }
+
+    cout<<error<<endl;
     
     
     
-    
-    
-    
+    if(error == 10){
+      left_motor->setVelocity(-6.28);
+      right_motor->setVelocity(6.28);
+      
+      robot->step(timeStep*160);
+      left_motor->setVelocity(-6.28);
+      right_motor->setVelocity(-6.28);
+      robot->step(timeStep*50);
+    }
+    else if(error == -10){
+      left_motor->setVelocity(6.28);
+      right_motor->setVelocity(-6.28);
+      
+      
+      robot->step(timeStep*160);
+      
+      left_motor->setVelocity(-6.28);
+      right_motor->setVelocity(-6.28);
+      robot->step(timeStep*50);
+    }
+    else if (error < 0){
+      pVal = (error/4)*Kp;
+      left_motor->setVelocity(pVal-6.28);
+      right_motor->setVelocity(-6.28);
+    }
+    else if (error > 0){
+      pVal = (error/4)*Kp;
+      left_motor->setVelocity(-6.28);
+      right_motor->setVelocity(pVal-6.28);
+    }
+    else{
+      left_motor->setVelocity(-6.28);
+      right_motor->setVelocity(-6.28);
+    }
     
     
     
