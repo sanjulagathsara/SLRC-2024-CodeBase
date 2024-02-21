@@ -4,37 +4,24 @@
 // Author: Team RoboticGen
 // Modifications:
 
-// You may need to add webots include files such as
-// <webots/DistanceSensor.hpp>, <webots/Motor.hpp>, etc.
-// and/or to add some other includes
 #include <webots/Robot.hpp>
 #include <webots/motor.hpp>
 #include <webots/DistanceSensor.hpp>
 #include <iostream>
 
-// All the webots classes are defined in the "webots" namespace
 using namespace webots;
 
 using namespace std;
 
-// This is the main program of your controller.
-// It creates an instance of your Robot instance, launches its
-// function(s) and destroys it at the end of the execution.
-// Note that only one instance of Robot should be created in
-// a controller program.
-// The arguments of the main function can be specified by the
-// "controllerArgs" field of the Robot node
+
 int main(int argc, char **argv) {
+
   // create the Robot instance.
   Robot *robot = new Robot();
 
-  // get the time step of the current world.
+
   int timeStep = (int)robot->getBasicTimeStep();
 
-  // You should insert a getDevice-like function in order to get the
-  // instance of a device of the robot. Something like:
-  //  Motor *motor = robot->getMotor("motorname");
-  //  DistanceSensor *ds = robot->getDistanceSensor("dsname");
   Motor *left_motor = robot->getMotor("left_motor");
   Motor *right_motor = robot->getMotor("right_motor");
   
@@ -63,30 +50,45 @@ int main(int argc, char **argv) {
   lineSensor6->enable(timeStep);
   lineSensor7->enable(timeStep);
   
-  //  ds->enable(timeStep);
+  double lineSensor[8];
+  bool lineVal[8];
+
+
+  std::cout << "Hello World!" << std::endl;
 
   // Main loop:
-  // - perform simulation steps until Webots is stopping the controller
+
   while (robot->step(timeStep) != -1) {
-    // Read the sensors:
-    // Enter here functions to read sensor data, like:
-    //  double val = ds->getValue();
-
-    // Process sensor data here.
-
-    // Enter here functions to send actuator commands, like:
-    //  motor->setPosition(10.0);
     
-    double val0 = lineSensor0->getValue();
-    double val1 = lineSensor1->getValue();
-    double val2 = lineSensor2->getValue();
-    double val3 = lineSensor3->getValue();
-    double val4 = lineSensor4->getValue();
-    double val5 = lineSensor5->getValue();
-    double val6 = lineSensor6->getValue();
-    double val7 = lineSensor7->getValue();
     
-    cout<<val0<<" ";
+
+    
+    lineSensor[0] = lineSensor0->getValue();
+    lineSensor[1] = lineSensor1->getValue();
+    lineSensor[2] = lineSensor2->getValue();
+    lineSensor[3] = lineSensor3->getValue();
+    lineSensor[4] = lineSensor4->getValue();
+    lineSensor[5] = lineSensor5->getValue();
+    lineSensor[6] = lineSensor6->getValue();
+    lineSensor[7] = lineSensor7->getValue();
+    
+    //cout<<lineSensor[0]<<" "<<lineSensor[1]<<" "<<lineSensor[2]<<" "<<lineSensor[3]<<" "<<lineSensor[4]<<" "<<lineSensor[5]<<" "<<lineSensor[6]<<" "<<lineSensor[7]<<endl;
+    
+    
+    for(int i=0;i<8;i++){
+      if(lineSensor[i] < 500){
+        lineVal[i] = 1;
+      }
+      else{
+        lineVal[i] = 0;
+      }
+    }
+    
+    cout<<lineVal[0]<<" "<<lineVal[1]<<" "<<lineVal[2]<<" "<<lineVal[3]<<" "<<lineVal[4]<<" "<<lineVal[5]<<" "<<lineVal[6]<<" "<<lineVal[7]<<endl;
+    
+    
+    
+    
     
     
     
