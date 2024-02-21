@@ -1,7 +1,7 @@
 // File:          slrc24_controller.cpp
 // Date:
 // Description:
-// Author:
+// Author: Team RoboticGen
 // Modifications:
 
 // You may need to add webots include files such as
@@ -9,9 +9,13 @@
 // and/or to add some other includes
 #include <webots/Robot.hpp>
 #include <webots/motor.hpp>
+#include <webots/DistanceSensor.hpp>
+#include <iostream>
 
 // All the webots classes are defined in the "webots" namespace
 using namespace webots;
+
+using namespace std;
 
 // This is the main program of your controller.
 // It creates an instance of your Robot instance, launches its
@@ -34,12 +38,30 @@ int main(int argc, char **argv) {
   Motor *left_motor = robot->getMotor("left_motor");
   Motor *right_motor = robot->getMotor("right_motor");
   
+  DistanceSensor *lineSensor0 = robot->getDistanceSensor("lineSensor0");
+  DistanceSensor *lineSensor1 = robot->getDistanceSensor("lineSensor1");
+  DistanceSensor *lineSensor2 = robot->getDistanceSensor("lineSensor2");
+  DistanceSensor *lineSensor3 = robot->getDistanceSensor("lineSensor3");
+  DistanceSensor *lineSensor4 = robot->getDistanceSensor("lineSensor4");
+  DistanceSensor *lineSensor5 = robot->getDistanceSensor("lineSensor5");
+  DistanceSensor *lineSensor6 = robot->getDistanceSensor("lineSensor6");
+  DistanceSensor *lineSensor7 = robot->getDistanceSensor("lineSensor7");
+
+  
   left_motor->setPosition(INFINITY);
   right_motor->setPosition(INFINITY);
   
   left_motor->setVelocity(-6.28);
   right_motor->setVelocity(-6.28);
   
+  lineSensor0->enable(timeStep);
+  lineSensor1->enable(timeStep);
+  lineSensor2->enable(timeStep);
+  lineSensor3->enable(timeStep);
+  lineSensor4->enable(timeStep);
+  lineSensor5->enable(timeStep);
+  lineSensor6->enable(timeStep);
+  lineSensor7->enable(timeStep);
   
   //  ds->enable(timeStep);
 
@@ -55,6 +77,19 @@ int main(int argc, char **argv) {
     // Enter here functions to send actuator commands, like:
     //  motor->setPosition(10.0);
     
+    double val0 = lineSensor0->getValue();
+    double val1 = lineSensor1->getValue();
+    double val2 = lineSensor2->getValue();
+    double val3 = lineSensor3->getValue();
+    double val4 = lineSensor4->getValue();
+    double val5 = lineSensor5->getValue();
+    double val6 = lineSensor6->getValue();
+    double val7 = lineSensor7->getValue();
+    
+    cout<<val0<<" ";
+    
+    
+    
     
     
     
@@ -65,3 +100,4 @@ int main(int argc, char **argv) {
   delete robot;
   return 0;
 }
+
