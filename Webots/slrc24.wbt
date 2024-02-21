@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.33471942934509247 -0.008125341221059247 0.9422828038592963 2.9770183253066773
-  position 4.03039741990848 -0.9732269575373773 3.1838687242490016
+  orientation -0.3262874812210143 0.6936448818006912 0.6421785246721908 0.26570082148219176
+  position 0.6885299311302708 0.15115127279222715 0.10209544614739906
 }
 TexturedBackground {
 }
@@ -141,6 +141,58 @@ Robot {
   children [
     DEF robot_body Group {
       children [
+        DEF LineSensorPanel Group {
+          children [
+            DEF lineSensor0 DistanceSensor {
+              translation -0.04 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor0"
+              type "infra-red"
+            }
+            DEF lineSensor1 DistanceSensor {
+              translation -0.03 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor1"
+              type "infra-red"
+            }
+            DEF lineSensor2 DistanceSensor {
+              translation -0.02 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor2"
+              type "infra-red"
+            }
+            DEF lineSensor3 DistanceSensor {
+              translation -0.01 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor3"
+              type "infra-red"
+            }
+            DEF lineSensor4 DistanceSensor {
+              translation -6.74634e-14 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor4"
+              type "infra-red"
+            }
+            DEF lineSensor5 DistanceSensor {
+              translation 0.01 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor5"
+              type "infra-red"
+            }
+            DEF lineSensor6 DistanceSensor {
+              translation 0.02 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor6"
+              type "infra-red"
+            }
+            DEF lineSensor7 DistanceSensor {
+              translation 0.03 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor7"
+              type "infra-red"
+            }
+          ]
+        }
         Solid {
           translation 0 0.08 -0.045
           children [
