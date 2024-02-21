@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.4741224819798256 0.42432092042898734 0.7714658959199601 1.776182316280766
-  position -0.6072630804200294 -4.368591368714938 6.736375011402236
+  orientation -0.2956185777859296 -0.14104515766365794 0.9448364514387969 3.761321702347686
+  position 1.9160869176663025 0.9305432478724912 1.0960433113715395
 }
 TexturedBackground {
 }
@@ -217,18 +217,21 @@ Robot {
           device [
             RotationalMotor {
               name "left_motor"
+              maxTorque 50
             }
           ]
           endPoint Solid {
-            translation -0.09000000000000008 -0.06000000000000005 -0.04
+            translation -0.1 -0.06 -0.04
             rotation 0 -0.9999999999999999 0 1.5707953071795862
             children [
               DEF left_wheel_shape Shape {
                 appearance PBRAppearance {
                   baseColor 0.127687 1 0.838727
+                  roughness 1
+                  metalness 0
                 }
                 geometry Cylinder {
-                  height 0.03
+                  height 0.01
                   radius 0.03
                 }
               }
@@ -245,18 +248,21 @@ Robot {
           device [
             RotationalMotor {
               name "right_motor"
+              maxTorque 50
             }
           ]
           endPoint Solid {
-            translation 0.09 -0.06 -0.04
+            translation 0.1 -0.06 -0.04
             rotation 1.4252501626753387e-07 -0.9999999999999796 -1.4367923625557603e-07 1.570795709917693
             children [
               DEF right_wheel_shape Shape {
                 appearance PBRAppearance {
                   baseColor 0.127687 1 0.838727
+                  roughness 1
+                  metalness 0
                 }
                 geometry Cylinder {
-                  height 0.03
+                  height 0.01
                   radius 0.03
                 }
               }
