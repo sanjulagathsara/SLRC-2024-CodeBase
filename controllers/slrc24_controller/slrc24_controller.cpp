@@ -5,8 +5,9 @@
 // Modifications:
 
 #include <webots/Robot.hpp>
-#include <webots/motor.hpp>
+#include <webots/Motor.hpp>
 #include <webots/DistanceSensor.hpp>
+#include <webots/LED.hpp>
 
 #include <iostream>
 
@@ -46,6 +47,8 @@ int main(int argc, char **argv) {
   DistanceSensor *lineSensor5 = robot->getDistanceSensor("lineSensor5");
   DistanceSensor *lineSensor6 = robot->getDistanceSensor("lineSensor6");
   DistanceSensor *lineSensor7 = robot->getDistanceSensor("lineSensor7");
+  
+  LED *stoneHolderLED = robot->getLED("stoneHolderLED");
 
   
   left_motor->setPosition(INFINITY);
@@ -62,6 +65,9 @@ int main(int argc, char **argv) {
   lineSensor5->enable(timeStep);
   lineSensor6->enable(timeStep);
   lineSensor7->enable(timeStep);
+  
+  stoneHolderLED->set(1);
+  
   
   
 
