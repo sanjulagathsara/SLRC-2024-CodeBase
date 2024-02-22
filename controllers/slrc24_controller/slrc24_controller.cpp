@@ -7,6 +7,7 @@
 #include <webots/Robot.hpp>
 #include <webots/motor.hpp>
 #include <webots/DistanceSensor.hpp>
+
 #include <iostream>
 
 using namespace webots;
@@ -61,7 +62,7 @@ int main(int argc, char **argv) {
   
   
 
-  std::cout << "Hello World!" << std::endl;
+  std::cout << "Robot is Starting!" << std::endl;
 
   // Main loop:
 
@@ -154,24 +155,30 @@ int main(int argc, char **argv) {
     
     if(error == 10){
       robot->step(timeStep*18);
-      left_motor->setVelocity(-6.28);
-      right_motor->setVelocity(6.28);
+      left_motor->setVelocity(-baseSpeed);
+      right_motor->setVelocity(baseSpeed);
       
-      robot->step(timeStep*50);
+      robot->step(timeStep*45);
       left_motor->setVelocity(0);
       right_motor->setVelocity(0);
+      
+      cout<<"Completed Turning 90 degrees"<<endl;
+      
       robot->step(timeStep*50);
     }
     else if(error == -10){
       robot->step(timeStep*18);
-      left_motor->setVelocity(6.28);
-      right_motor->setVelocity(-6.28);
+      left_motor->setVelocity(baseSpeed);
+      right_motor->setVelocity(-baseSpeed);
       
       
-      robot->step(timeStep*50);
+      robot->step(timeStep*45);
       
       left_motor->setVelocity(0);
       right_motor->setVelocity(0);
+      
+      cout<<"Completed Turning 90 degrees"<<endl;
+      
       robot->step(timeStep*50);
     }
     else if (error < 0){

@@ -213,6 +213,8 @@ Robot {
         DEF left_wheel HingeJoint {
           jointParameters HingeJointParameters {
             anchor 0 -0.01 -0.04
+            dampingConstant 10
+            staticFriction 30
           }
           device [
             RotationalMotor {
@@ -244,6 +246,8 @@ Robot {
         DEF right_wheel HingeJoint {
           jointParameters HingeJointParameters {
             anchor 0 -0.01 -0.04
+            dampingConstant 10
+            staticFriction 30
           }
           device [
             RotationalMotor {
