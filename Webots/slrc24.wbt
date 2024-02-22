@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.2956185777859296 -0.14104515766365794 0.9448364514387969 3.761321702347686
-  position 1.9160869176663025 0.9305432478724912 1.0960433113715395
+  orientation -0.4513322184944779 0.0032223879871609695 0.8923501805706732 2.972941478991639
+  position 3.7237381487392804 -0.23494673172451058 3.566059380884348
 }
 TexturedBackground {
 }
@@ -141,6 +141,36 @@ Robot {
   children [
     DEF robot_body Group {
       children [
+        LED {
+          translation -0.09 -0.09 0.05
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+                metalness 0
+              }
+              geometry Capsule {
+                height 0.01
+                radius 0.005
+              }
+            }
+            PointLight {
+              attenuation 0 0 1
+              color 0 0 0
+              intensity 0.5
+              location 0 0.3 0
+              on FALSE
+              radius 10
+              castShadows TRUE
+            }
+          ]
+          name "stoneHolderLED"
+          color [
+            1 0 0
+            0 1 0
+            0 0 1
+          ]
+        }
         DEF LineSensorPanel Group {
           children [
             DEF lineSensor0 DistanceSensor {
@@ -212,7 +242,9 @@ Robot {
         }
         DEF left_wheel HingeJoint {
           jointParameters HingeJointParameters {
-            anchor 0 -0.06 -0.04
+            anchor 0 -0.01 -0.04
+            dampingConstant 10
+            staticFriction 30
           }
           device [
             RotationalMotor {
@@ -221,7 +253,7 @@ Robot {
             }
           ]
           endPoint Solid {
-            translation -0.1 -0.06 -0.04
+            translation -0.1 -0.01 -0.04
             rotation 0 -0.9999999999999999 0 1.5707953071795862
             children [
               DEF left_wheel_shape Shape {
@@ -243,7 +275,9 @@ Robot {
         }
         DEF right_wheel HingeJoint {
           jointParameters HingeJointParameters {
-            anchor 0 -0.06 -0.04
+            anchor 0 -0.01 -0.04
+            dampingConstant 10
+            staticFriction 30
           }
           device [
             RotationalMotor {
@@ -252,7 +286,7 @@ Robot {
             }
           ]
           endPoint Solid {
-            translation 0.1 -0.06 -0.04
+            translation 0.1 -0.010000000000000002 -0.04
             rotation 1.4252501626753387e-07 -0.9999999999999796 -1.4367923625557603e-07 1.570795709917693
             children [
               DEF right_wheel_shape Shape {
@@ -322,6 +356,41 @@ Solid {
   ]
   name "pose2_cuboid"
   boundingObject USE pose2_cuboid_shape
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.46 0.18 0.02
+  children [
+    DEF stone_holder_body Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.12 0.15 0.04
+      }
+    }
+  ]
+  name "stone_holder_body"
+  boundingObject USE stone_holder_body
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.535 0.18 0.07
+  children [
+    DEF stone_holder_face Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 0
+        metalness 0
+      }
+      geometry Box {
+        size 0.03 0.15 0.15
+      }
+    }
+  ]
+  name "stone_holder_face"
+  boundingObject USE stone_holder_face
   physics Physics {
   }
 }
