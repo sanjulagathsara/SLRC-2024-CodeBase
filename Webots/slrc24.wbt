@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.2956185777859296 -0.14104515766365794 0.9448364514387969 3.761321702347686
-  position 1.9160869176663025 0.9305432478724912 1.0960433113715395
+  orientation -0.3963475933151107 -0.009777755987277417 0.9180484631876321 3.0095766181160886
+  position 4.249892240808857 -0.5323489155998936 4.091147708759644
 }
 TexturedBackground {
 }
@@ -212,7 +212,7 @@ Robot {
         }
         DEF left_wheel HingeJoint {
           jointParameters HingeJointParameters {
-            anchor 0 -0.06 -0.04
+            anchor 0 -0.01 -0.04
           }
           device [
             RotationalMotor {
@@ -221,7 +221,7 @@ Robot {
             }
           ]
           endPoint Solid {
-            translation -0.1 -0.06 -0.04
+            translation -0.1 -0.01 -0.04
             rotation 0 -0.9999999999999999 0 1.5707953071795862
             children [
               DEF left_wheel_shape Shape {
@@ -243,7 +243,7 @@ Robot {
         }
         DEF right_wheel HingeJoint {
           jointParameters HingeJointParameters {
-            anchor 0 -0.06 -0.04
+            anchor 0 -0.01 -0.04
           }
           device [
             RotationalMotor {
@@ -252,7 +252,7 @@ Robot {
             }
           ]
           endPoint Solid {
-            translation 0.1 -0.06 -0.04
+            translation 0.1 -0.010000000000000002 -0.04
             rotation 1.4252501626753387e-07 -0.9999999999999796 -1.4367923625557603e-07 1.570795709917693
             children [
               DEF right_wheel_shape Shape {
