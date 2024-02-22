@@ -28,6 +28,9 @@ int main(int argc, char **argv) {
   float pVal;
   float Kp = 5;
   float baseSpeed = 5;
+  bool TJuncFlag = 0;
+  
+  int junction = 0;
   
   int error = 0;
 
@@ -141,6 +144,9 @@ int main(int argc, char **argv) {
     else if( lineV[0] == 1 && lineV[1] == 1 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
     error = -10;
     }
+    else if( lineV[0] == 1 && lineV[1] == 1 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 1 && lineV[7] == 1 ){
+    error = 100;
+    }
     else{
     //error = error;
     if(error == 10 || error == -10){
@@ -181,6 +187,15 @@ int main(int argc, char **argv) {
       
       robot->step(timeStep*50);
     }
+    
+    else if(error == 100){ // T junction Detected
+      
+      TJuncFlag = 1;
+      
+    }
+    
+    
+    
     else if (error < 0){
       pVal = -(error/5)*Kp;
       if(pVal > 5){
@@ -200,6 +215,19 @@ int main(int argc, char **argv) {
     else{
       left_motor->setVelocity(-baseSpeed);
       right_motor->setVelocity(-baseSpeed);
+    }
+    
+    
+    
+    
+    if(TJuncFlag == 1){
+      
+      if(junction == 0){
+      
+      }
+      
+      junction++;
+      TJuncFlag = 0;
     }
     
     
