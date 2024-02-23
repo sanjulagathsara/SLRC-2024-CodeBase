@@ -134,21 +134,27 @@ int main(int argc, char **argv) {
     }
     else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 1 && lineV[7] == 1 ){
     error = 10;
+    if(junction == 1){error = 100;}
     }
     else if( lineV[0] == 1 && lineV[1] == 1 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
     error = -10;
+    if(junction == 1){error = 100;}
     }
     else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 1 && lineV[7] == 1 ){
     error = 10;
+    if(junction == 1){error = 100;}
     }
     else if( lineV[0] == 1 && lineV[1] == 1 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 0 && lineV[7] == 0 ){
     error = -10;
+    if(junction == 1){error = 100;}
     }
     else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 1 && lineV[7] == 1 ){
     error = 10;
+    if(junction == 1){error = 100;}
     }
     else if( lineV[0] == 1 && lineV[1] == 1 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
     error = -10;
+    if(junction == 1){error = 100;}
     }
     else if( lineV[0] == 1 && lineV[1] == 1 && lineV[2] == 1 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 1 && lineV[7] == 1 ){
     error = 100;
@@ -229,6 +235,23 @@ int main(int argc, char **argv) {
     if(TJuncFlag == 1){
       
       if(junction == 0){
+      
+      cout<<"Came to Junction 0"<<endl;
+      
+      left_motor->setVelocity(-baseSpeed);
+      right_motor->setVelocity(-baseSpeed);
+      
+      robot->step(timeStep*10);
+      
+      }
+      else if(junction == 1){
+      
+      cout<<"Came to Junction 1"<<endl;
+      
+      left_motor->setVelocity(-baseSpeed);
+      right_motor->setVelocity(-baseSpeed);
+      
+      robot->step(timeStep*10);
       
       }
       
