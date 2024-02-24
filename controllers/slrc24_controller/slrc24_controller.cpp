@@ -8,6 +8,7 @@
 #include <webots/Motor.hpp>
 #include <webots/DistanceSensor.hpp>
 #include <webots/LED.hpp>
+#include <webots/Camera.hpp>
 
 #include <iostream>
 
@@ -48,6 +49,8 @@ int main(int argc, char **argv) {
   DistanceSensor *lineSensor6 = robot->getDistanceSensor("lineSensor6");
   DistanceSensor *lineSensor7 = robot->getDistanceSensor("lineSensor7");
   
+  Camera *front_color_sensor = robot->getCamera("front_color_sensor");
+  
   LED *stoneHolderLED = robot->getLED("stoneHolderLED");
 
   
@@ -65,6 +68,8 @@ int main(int argc, char **argv) {
   lineSensor5->enable(timeStep);
   lineSensor6->enable(timeStep);
   lineSensor7->enable(timeStep);
+  
+  front_color_sensor->enable(timeStep);
   
   stoneHolderLED->set(1);
   
@@ -233,8 +238,10 @@ int main(int argc, char **argv) {
     
     
     if(TJuncFlag == 1){
+    
+      cout<<"TJuncFlag = "<<TJuncFlag<<" Junction = "<<junction<<endl;
       
-      if(junction == 0){
+      if(junction == 0){ // Starting Box
       
       cout<<"Came to Junction 0"<<endl;
       
@@ -244,7 +251,7 @@ int main(int argc, char **argv) {
       robot->step(timeStep*10);
       
       }
-      else if(junction == 1){
+      else if(junction == 1){ // First Left T junction
       
       cout<<"Came to Junction 1"<<endl;
       
@@ -253,6 +260,25 @@ int main(int argc, char **argv) {
       
       robot->step(timeStep*10);
       
+      }
+      else if(junction == 2){ // Came near the stone holder
+      
+      cout<<"Came to Stone Holder"<<endl;
+      
+      left_motor->setVelocity(0);
+      right_motor->setVelocity(0);
+      
+      robot->step(timeStep*10);
+      
+      cout<<"Starting Reading the Stone Holder Color"<<endl;
+      
+      const unsigned char *img = front_color_sensor->getImage();
+      
+      int stone_holder_color1 = front_color_sensor->imageGetGreen(img,64,32,32);
+      int stone_holder_color2 = front_color_sensor->imageGetBlue(img,64,32,32);
+      
+      cout<<"Color Green = "<<stone_holder_color1<<" Blue - "<<stone_holder_color2<<endl;
+      robot->step(timeStep*50);
       }
       
       junction++;
