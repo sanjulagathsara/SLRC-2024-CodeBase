@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.2886438432351715 0.1656744238316617 0.9429934872789295 1.8847950409076701
-  position 1.3495461668456623 -1.3327420212158463 0.9569937766915909
+  orientation 0.011600880917334622 0.09282726619589766 -0.9956146434301466 2.1175245443278086
+  position 4.93591153363486 8.521631768413256 1.7069676325179668
 }
 TexturedBackground {
 }
@@ -20,14 +20,14 @@ TexturedBackgroundLight {
 }
 RectangleArena {
   translation 0.11 0 0
-  floorSize 2.438 4.877
-  floorTileSize 2.438 4.877
+  floorSize 2.4 4.8
+  floorTileSize 2.4 4.8
   floorAppearance Appearance {
     material Material {
     }
     texture ImageTexture {
       url [
-        "../Webots/ArenaLowQuality.jpg"
+        "../../../../Downloads/Arena filled nmjjjj.jpg"
       ]
       repeatS FALSE
       repeatT FALSE
@@ -36,7 +36,8 @@ RectangleArena {
   }
 }
 Solid {
-  translation 0.89 0.94 0.03
+  translation 0.05183827786132599 1.6549399999999999 0.024950950000000013
+  rotation 0.577350269312576 0.5773502689437255 0.5773502693125755 -2.0943951027620455
   children [
     DEF metal_box_shape Shape {
       appearance PBRAppearance {
@@ -50,59 +51,12 @@ Solid {
   boundingObject USE metal_box_shape
   physics Physics {
   }
+  linearVelocity -3.374321721473602e-17 -5.328794072943908e-17 8.253305229565113e-23
+  angularVelocity 2.1316290361419094e-15 -2.1316422077392395e-15 2.8166775758134503e-16
 }
 Solid {
-  translation 0.01 -1.82 0.03
-  children [
-    DEF metal_box_shape Shape {
-      appearance PBRAppearance {
-      }
-      geometry Box {
-        size 0.05 0.05 0.05
-      }
-    }
-  ]
-  name "metal_box2"
-  boundingObject USE metal_box_shape
-  physics Physics {
-  }
-}
-Solid {
-  translation 0.39 -1.44 0.02
-  children [
-    DEF non_metal_box Shape {
-      appearance PBRAppearance {
-        metalness 0
-      }
-      geometry Box {
-        size 0.05 0.05 0.05
-      }
-    }
-  ]
-  name "non_metal_box"
-  boundingObject USE non_metal_box
-  physics Physics {
-  }
-}
-Solid {
-  translation -0.36 -1.44 0.02
-  children [
-    DEF non_metal_box Shape {
-      appearance PBRAppearance {
-        metalness 0
-      }
-      geometry Box {
-        size 0.05 0.05 0.05
-      }
-    }
-  ]
-  name "non_metal_box2"
-  boundingObject USE non_metal_box
-  physics Physics {
-  }
-}
-Solid {
-  translation 0.52 0.56 0.02
+  translation 0.380403999992312 1.320510000295872 0.02495095000000001
+  rotation 6.992973035039404e-08 -1.811898733770954e-07 -0.9999999999999811 8.698131309490492e-10
   children [
     DEF non_metal_box Shape {
       appearance PBRAppearance {
@@ -117,9 +71,12 @@ Solid {
   boundingObject USE non_metal_box
   physics Physics {
   }
+  linearVelocity -3.207168957131404e-17 -1.1007616683958636e-16 1.0896997586529746e-23
+  angularVelocity 4.796163466474442e-15 -1.598721154959372e-15 3.205174945392934e-16
 }
 Solid {
-  translation 0.52 1.32 0.02
+  translation -0.2699759697458537 1.3200799998789838 0.02495095
+  rotation -0.002105709014977867 -0.9999955659797141 -0.002105709014977915 1.5708007608250125
   children [
     DEF non_metal_box Shape {
       appearance PBRAppearance {
@@ -134,10 +91,12 @@ Solid {
   boundingObject USE non_metal_box
   physics Physics {
   }
+  linearVelocity 8.582686877891278e-17 9.438767449446151e-17 -5.684340077724354e-17
+  angularVelocity -3.1974422543872434e-15 3.197452485992821e-15 1.5193217081611444e-16
 }
 Robot {
-  translation 1.17 0.18 0.07
-  rotation 0 0 1 1.5708
+  translation 1.1015804951171526 0.1599999987440313 0.06964195323411457
+  rotation 0.0010229116723065742 0.0010229141489660819 0.9999989536486298 1.5708010716690408
   children [
     DEF robot_body Group {
       children [
@@ -242,6 +201,7 @@ Robot {
         }
         DEF left_wheel HingeJoint {
           jointParameters HingeJointParameters {
+            position 9.194990981007818e-12
             anchor 0 -0.01 -0.04
             dampingConstant 10
             staticFriction 30
@@ -253,8 +213,8 @@ Robot {
             }
           ]
           endPoint Solid {
-            translation -0.1 -0.01 -0.04
-            rotation 0 -0.9999999999999999 0 1.5707953071795862
+            translation -0.09999999999999912 -0.01 -0.04
+            rotation 4.597500178258047e-12 -0.9999999999999999 -4.597495490728513e-12 1.5707953071795666
             children [
               DEF left_wheel_shape Shape {
                 appearance PBRAppearance {
@@ -271,10 +231,13 @@ Robot {
             boundingObject USE left_wheel_shape
             physics Physics {
             }
+            linearVelocity -6.337719616449036e-09 -9.765294456121918e-09 -3.900706395670327e-10
+            angularVelocity 9.966938988525504e-09 -3.307391955218605e-08 -7.583804603168716e-07
           }
         }
         DEF right_wheel HingeJoint {
           jointParameters HingeJointParameters {
+            position 7.079268507953402e-07
             anchor 0 -0.01 -0.04
             dampingConstant 10
             staticFriction 30
@@ -286,8 +249,8 @@ Robot {
             }
           ]
           endPoint Solid {
-            translation 0.1 -0.010000000000000002 -0.04
-            rotation 1.4252501626753387e-07 -0.9999999999999796 -1.4367923625557603e-07 1.570795709917693
+            translation 0.0999999999999992 -0.010000000000000002 -0.04
+            rotation 4.964886600171707e-07 -0.9999999999997529 -4.976426616531662e-07 1.5707957099179095
             children [
               DEF right_wheel_shape Shape {
                 appearance PBRAppearance {
@@ -305,6 +268,8 @@ Robot {
             boundingObject USE right_wheel_shape
             physics Physics {
             }
+            linearVelocity 1.8736322084054233e-07 -9.76452900797424e-09 1.564005362216966e-09
+            angularVelocity 9.938997223892837e-09 7.044277852938146e-06 -7.648937722926183e-07
           }
         }
         DEF body_box Shape {
@@ -328,27 +293,12 @@ Robot {
   battery [
     0
   ]
+  linearVelocity 5.632650577164699e-08 -2.281838460607984e-08 2.37746155390448e-10
+  angularVelocity 9.336677587827438e-09 -3.28449050573282e-08 -7.596105122788675e-07
 }
 Solid {
-  translation 0.69 -1.91 0.08
-  children [
-    DEF pose1_cylinder_shape Shape {
-      appearance PBRAppearance {
-        metalness 0
-      }
-      geometry Cylinder {
-        height 0.15
-        radius 0.03
-      }
-    }
-  ]
-  name "pose1_cylinder"
-  boundingObject USE pose1_cylinder_shape
-  physics Physics {
-  }
-}
-Solid {
-  translation -0.64 -1.89 0.08
+  translation -0.7024041109375267 -1.8901306660016695 0.07471163047878691
+  rotation -5.948405925495397e-15 6.1413308167284524e-15 -1 0.004826578634403476
   children [
     DEF pose2_cuboid_shape Shape {
       appearance PBRAppearance {
@@ -363,9 +313,92 @@ Solid {
   boundingObject USE pose2_cuboid_shape
   physics Physics {
   }
+  linearVelocity 2.1432237660934393e-17 -4.606082879703195e-17 -3.4811631935001266e-07
+  angularVelocity 3.9692168316704505e-16 6.615361386117424e-16 4.362025451537421e-17
 }
 Solid {
-  translation 0.46 0.18 0.02
+  translation -0.01157270460984393 -2.287303519674646 0.034711586
+  rotation 0.9955456224067484 0.06666675973361864 0.06666675973361848 1.575260639858172
+  children [
+    DEF pose2_cuboid_shape Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.07 0.07 0.15
+      }
+    }
+  ]
+  name "pose2_cuboid(1)"
+  boundingObject USE pose2_cuboid_shape
+  physics Physics {
+  }
+  linearVelocity 3.383751587024255e-17 -3.72285167584134e-17 6.532808548091076e-17
+  angularVelocity 8.182540965889531e-16 5.380731304413053e-16 6.329178298401358e-17
+}
+Solid {
+  translation -0.04687841405363705 -1.463479232769252 0.09764266978235216
+  rotation 0.5875518464660705 -0.003097986060719495 -0.8091805918314396 0.013032017525310644
+  children [
+    DEF pose2_cuboid_shape Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 1 0.03 0.2
+      }
+    }
+  ]
+  name "pose2_cuboid(2)"
+  boundingObject USE pose2_cuboid_shape
+  physics Physics {
+  }
+  linearVelocity -2.2534588809655977e-06 -0.0002136851313703113 -1.6283084267617702e-06
+  angularVelocity 0.0021369217086785693 -2.25353311737097e-05 3.602370335796275e-18
+}
+Solid {
+  translation -0.034093926247482295 -1.6677450786574457 0.012645600000000005
+  rotation 0.9999988230850013 0.0010848568137002826 0.0010848568137003071 1.5707975037105881
+  children [
+    DEF pose2_cuboid_shape Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 1 0.03 0.2
+      }
+    }
+  ]
+  name "pose2_cuboid(4)"
+  boundingObject USE pose2_cuboid_shape
+  physics Physics {
+  }
+  linearVelocity 7.29430884523985e-19 5.3584840511973024e-17 -3.5439985165171375e-17
+  angularVelocity -3.811317549125358e-15 2.6322667055629046e-17 -3.2348309389208507e-18
+}
+Solid {
+  translation 0.11538548208494377 -2.2757975680675746 0.03471163047878693
+  rotation 0.9998939071597269 0.01029986468006832 0.010299864680068459 1.5709024252632136
+  children [
+    DEF pose2_cuboid_shape Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.07 0.07 0.15
+      }
+    }
+  ]
+  name "pose2_cuboid(3)"
+  boundingObject USE pose2_cuboid_shape
+  physics Physics {
+  }
+  linearVelocity 1.1394278357799037e-17 -7.623395651374221e-17 -3.481163192726019e-07
+  angularVelocity 3.4328220726043648e-15 6.124019200632222e-16 1.806939178885236e-16
+}
+Solid {
+  translation 0.4076872593270868 0.15182867014756618 0.019717472
+  rotation -2.2499121204159073e-13 -1.0737281944228066e-13 1 0.0006151173087620279
   children [
     DEF stone_holder_body Shape {
       appearance PBRAppearance {
@@ -380,9 +413,12 @@ Solid {
   boundingObject USE stone_holder_body
   physics Physics {
   }
+  linearVelocity -1.7155095732642175e-17 1.163496594756596e-17 3.341522469934732e-17
+  angularVelocity -3.236034279746625e-16 -6.169976141918599e-16 -5.143212585939246e-17
 }
 Solid {
-  translation 0.535 0.18 0.07
+  translation 0.48500082198068317 0.15000000504322816 0.07473513000000001
+  rotation -1.7685198525890848e-10 8.951101672772154e-11 1 1.3997049730532383e-07
   children [
     DEF stone_holder_face Shape {
       appearance PBRAppearance {
@@ -398,4 +434,6 @@ Solid {
   boundingObject USE stone_holder_face
   physics Physics {
   }
+  linearVelocity 2.586615163060821e-16 -1.0291389071501207e-17 -1.2631742823842673e-16
+  angularVelocity 4.218110540539852e-16 3.6522844237260514e-15 -2.980339944286877e-17
 }
