@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.4513322184944779 0.0032223879871609695 0.8923501805706732 2.972941478991639
-  position 3.7237381487392804 -0.23494673172451058 3.566059380884348
+  orientation -0.2886438432351715 0.1656744238316617 0.9429934872789295 1.8847950409076701
+  position 1.3495461668456623 -1.3327420212158463 0.9569937766915909
 }
 TexturedBackground {
 }
@@ -313,6 +313,11 @@ Robot {
           geometry Box {
             size 0.2 0.2 0.1
           }
+        }
+        Camera {
+          translation 0 0.1 0
+          rotation 0 0 1 1.5708
+          name "front_color_sensor"
         }
       ]
     }
