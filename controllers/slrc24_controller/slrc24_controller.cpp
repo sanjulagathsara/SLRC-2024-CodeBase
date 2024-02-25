@@ -274,10 +274,19 @@ int main(int argc, char **argv) {
       
       const unsigned char *img = front_color_sensor->getImage();
       
-      int stone_holder_color1 = front_color_sensor->imageGetGreen(img,64,32,32);
-      int stone_holder_color2 = front_color_sensor->imageGetBlue(img,64,32,32);
+      int stone_holder_color_green = front_color_sensor->imageGetGreen(img,64,32,32);
+      int stone_holder_color_blue = front_color_sensor->imageGetBlue(img,64,32,32);
       
-      cout<<"Color Green = "<<stone_holder_color1<<" Blue - "<<stone_holder_color2<<endl;
+      cout<<"Color Green = "<<stone_holder_color_green<<" Blue - "<<stone_holder_color_blue<<endl;
+      
+      if(stone_holder_color_green > stone_holder_color_blue){
+        stoneHolderLED->set(2);
+      }
+      else{
+        stoneHolderLED->set(3);
+      }
+      
+      
       robot->step(timeStep*50);
       }
       
