@@ -11,8 +11,8 @@ WorldInfo {
   title "E-puck simulation"
 }
 Viewpoint {
-  orientation -0.33471942934509247 -0.008125341221059247 0.9422828038592963 2.9770183253066773
-  position 4.03039741990848 -0.9732269575373773 3.1838687242490016
+  orientation -0.2886438432351715 0.1656744238316617 0.9429934872789295 1.8847950409076701
+  position 1.3495461668456623 -1.3327420212158463 0.9569937766915909
 }
 TexturedBackground {
 }
@@ -141,6 +141,88 @@ Robot {
   children [
     DEF robot_body Group {
       children [
+        LED {
+          translation -0.09 -0.09 0.05
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+                metalness 0
+              }
+              geometry Capsule {
+                height 0.01
+                radius 0.005
+              }
+            }
+            PointLight {
+              attenuation 0 0 1
+              color 0 0 0
+              intensity 0.5
+              location 0 0.3 0
+              on FALSE
+              radius 10
+              castShadows TRUE
+            }
+          ]
+          name "stoneHolderLED"
+          color [
+            1 0 0
+            0 1 0
+            0 0 1
+          ]
+        }
+        DEF LineSensorPanel Group {
+          children [
+            DEF lineSensor0 DistanceSensor {
+              translation -0.04 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor0"
+              type "infra-red"
+            }
+            DEF lineSensor1 DistanceSensor {
+              translation -0.03 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor1"
+              type "infra-red"
+            }
+            DEF lineSensor2 DistanceSensor {
+              translation -0.02 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor2"
+              type "infra-red"
+            }
+            DEF lineSensor3 DistanceSensor {
+              translation -0.01 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor3"
+              type "infra-red"
+            }
+            DEF lineSensor4 DistanceSensor {
+              translation -6.74634e-14 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor4"
+              type "infra-red"
+            }
+            DEF lineSensor5 DistanceSensor {
+              translation 0.01 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor5"
+              type "infra-red"
+            }
+            DEF lineSensor6 DistanceSensor {
+              translation 0.02 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor6"
+              type "infra-red"
+            }
+            DEF lineSensor7 DistanceSensor {
+              translation 0.03 0.1 -0.05
+              rotation 0 1 0 1.5708
+              name "lineSensor7"
+              type "infra-red"
+            }
+          ]
+        }
         Solid {
           translation 0 0.08 -0.045
           children [
@@ -160,23 +242,28 @@ Robot {
         }
         DEF left_wheel HingeJoint {
           jointParameters HingeJointParameters {
-            anchor 0 -0.06 -0.04
+            anchor 0 -0.01 -0.04
+            dampingConstant 10
+            staticFriction 30
           }
           device [
             RotationalMotor {
               name "left_motor"
+              maxTorque 50
             }
           ]
           endPoint Solid {
-            translation -0.09000000000000008 -0.06000000000000005 -0.04
+            translation -0.1 -0.01 -0.04
             rotation 0 -0.9999999999999999 0 1.5707953071795862
             children [
               DEF left_wheel_shape Shape {
                 appearance PBRAppearance {
                   baseColor 0.127687 1 0.838727
+                  roughness 1
+                  metalness 0
                 }
                 geometry Cylinder {
-                  height 0.03
+                  height 0.01
                   radius 0.03
                 }
               }
@@ -188,23 +275,28 @@ Robot {
         }
         DEF right_wheel HingeJoint {
           jointParameters HingeJointParameters {
-            anchor 0 -0.06 -0.04
+            anchor 0 -0.01 -0.04
+            dampingConstant 10
+            staticFriction 30
           }
           device [
             RotationalMotor {
               name "right_motor"
+              maxTorque 50
             }
           ]
           endPoint Solid {
-            translation 0.09 -0.06 -0.04
+            translation 0.1 -0.010000000000000002 -0.04
             rotation 1.4252501626753387e-07 -0.9999999999999796 -1.4367923625557603e-07 1.570795709917693
             children [
               DEF right_wheel_shape Shape {
                 appearance PBRAppearance {
                   baseColor 0.127687 1 0.838727
+                  roughness 1
+                  metalness 0
                 }
                 geometry Cylinder {
-                  height 0.03
+                  height 0.01
                   radius 0.03
                 }
               }
@@ -221,6 +313,11 @@ Robot {
           geometry Box {
             size 0.2 0.2 0.1
           }
+        }
+        Camera {
+          translation 0 0.1 0
+          rotation 0 0 1 1.5708
+          name "front_color_sensor"
         }
       ]
     }
@@ -264,6 +361,41 @@ Solid {
   ]
   name "pose2_cuboid"
   boundingObject USE pose2_cuboid_shape
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.46 0.18 0.02
+  children [
+    DEF stone_holder_body Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.12 0.15 0.04
+      }
+    }
+  ]
+  name "stone_holder_body"
+  boundingObject USE stone_holder_body
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.535 0.18 0.07
+  children [
+    DEF stone_holder_face Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 0
+        metalness 0
+      }
+      geometry Box {
+        size 0.03 0.15 0.15
+      }
+    }
+  ]
+  name "stone_holder_face"
+  boundingObject USE stone_holder_face
   physics Physics {
   }
 }
