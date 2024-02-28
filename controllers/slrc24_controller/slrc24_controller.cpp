@@ -120,10 +120,10 @@ int main(int argc, char **argv) {
     error = -3;
     }
     else if( lineV[0] == 1 && lineV[1] == 1 /*&& lineV[2] == 0*/ && lineV[3] == 0 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
-    error = -4;
+    error = -5;
     }
     else if( lineV[0] == 1 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 0 ){
-    error = -5;
+    error = -6;
     }
     else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 0 && lineV[7] == 0 ){
     error = 2;
@@ -132,10 +132,10 @@ int main(int argc, char **argv) {
     error = 3;
     }
     else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 0 &&/* lineV[5] == 0 &&*/ lineV[6] == 1 && lineV[7] == 1 ){
-    error = 4;
+    error = 5;
     }
     else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 0 && lineV[4] == 0 && lineV[5] == 0 && lineV[6] == 0 && lineV[7] == 1 ){
-    error = 5;
+    error = 6;
     }
     else if( lineV[0] == 0 && lineV[1] == 0 && lineV[2] == 0 && lineV[3] == 1 && lineV[4] == 1 && lineV[5] == 1 && lineV[6] == 1 && lineV[7] == 1 ){
     error = 10;
@@ -303,7 +303,7 @@ int main(int argc, char **argv) {
       else if(junction == 3){
         left_motor->setVelocity(-baseSpeed);
         right_motor->setVelocity(-baseSpeed);
-        robot->step(timeStep*25);
+        robot->step(timeStep*10);
         
         left_motor->setVelocity(-baseSpeed);
         right_motor->setVelocity(baseSpeed);
