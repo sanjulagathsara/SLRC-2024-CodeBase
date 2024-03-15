@@ -25,16 +25,31 @@ void setup(){
   digitalWrite(INA2,LOW);
   digitalWrite(INB2,HIGH);
 
-  for(int i=0;i<256;i++){
-    analogWrite(left_pwm,i);
-    analogWrite(right_pwm,i);
+  for(int i=0;i<256;i+=5){
+    move_robot(i,i);
     delay(10);
   }
-  for(int i=255;i>=0;i--){
-    analogWrite(left_pwm,i);
-    analogWrite(right_pwm,i);
+  for(int i=255;i>=-255;i-=5){
+    move_robot(i,i);
     delay(10);
   }
+  for(int i=-255;i<=0;i+=5){
+    move_robot(i,i);
+    delay(10);
+  }
+  for(int i=0;i<256;i+=5){
+    move_robot(i,-i);
+    delay(10);
+  }
+  for(int i=255;i>=-255;i-=5){
+    move_robot(i,-i);
+    delay(10);
+  }
+  for(int i=-255;i<=0;i+=5){
+    move_robot(i,-i);
+    delay(10);
+  }
+
 
 }
 
@@ -42,6 +57,35 @@ void loop(){
 
 }
 
-void go_forward(int left_speed,int right_speed){
-  
+void move_robot(int left_speed,int right_speed){
+
+    if(left_speed>=0){
+      digitalWrite(INA1,LOW);
+      digitalWrite(INB1,HIGH);
+      analogWrite(left_pwm,left_speed);
+    }
+    else{
+      digitalWrite(INA1,HIGH);
+      digitalWrite(INB1,LOW);
+      analogWrite(left_pwm,-left_speed);
+    }
+
+
+    if(right_speed>=0){
+      digitalWrite(INA2,LOW);
+      digitalWrite(INB2,HIGH);
+      analogWrite(right_pwm,right_speed);
+    }
+    else{
+      digitalWrite(INA2,HIGH);
+      digitalWrite(INB2,LOW);
+      analogWrite(right_pwm,-right_speed);
+    }
+
+}
+
+void brake(){
+      digitalWrite(INA2,LOW);
+      digitalWrite(INB2,LOW);
+      analogWrite(0,0);
 }
