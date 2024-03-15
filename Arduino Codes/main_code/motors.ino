@@ -7,40 +7,23 @@
 #define INB2 30
 #define INA2 32
 
+void motor_setup(){
+  pinMode(left_pwm,OUTPUT);
+  pinMode(right_pwm,OUTPUT);
+  pinMode(EN1,OUTPUT);
+  pinMode(INB1,OUTPUT);
+  pinMode(INA1,OUTPUT);
+  pinMode(EN2,OUTPUT);
+  pinMode(INB2,OUTPUT);
+  pinMode(INA2,OUTPUT);
 
-void setup(){
-  
+  digitalWrite(EN1,HIGH);
+  digitalWrite(EN2,HIGH);
 
-  for(int i=0;i<256;i+=5){
-    move_robot(i,i);
-    delay(10);
-  }
-  for(int i=255;i>=-255;i-=5){
-    move_robot(i,i);
-    delay(10);
-  }
-  for(int i=-255;i<=0;i+=5){
-    move_robot(i,i);
-    delay(10);
-  }
-  for(int i=0;i<256;i+=5){
-    move_robot(i,-i);
-    delay(10);
-  }
-  for(int i=255;i>=-255;i-=5){
-    move_robot(i,-i);
-    delay(10);
-  }
-  for(int i=-255;i<=0;i+=5){
-    move_robot(i,-i);
-    delay(10);
-  }
-
-
-}
-
-void loop(){
-
+  digitalWrite(INA1,LOW);
+  digitalWrite(INB1,LOW);
+  digitalWrite(INA2,LOW);
+  digitalWrite(INB2,LOW);
 }
 
 void move_robot(int left_speed,int right_speed){
