@@ -1,9 +1,9 @@
 build/release/slrc24_controller.o: slrc24_controller.cpp \
-  /Applications/Webots.app/Contents/include/controller/cpp/webots/Robot.hpp \
-  /Applications/Webots.app/Contents/include/controller/cpp/webots/Motor.hpp \
-  /Applications/Webots.app/Contents/include/controller/cpp/webots/Device.hpp \
-  /Applications/Webots.app/Contents/include/controller/cpp/webots/../../c/webots/types.h \
-  /Applications/Webots.app/Contents/include/controller/cpp/webots/DistanceSensor.hpp \
-  /Applications/Webots.app/Contents/include/controller/cpp/webots/LED.hpp \
-  /Applications/Webots.app/Contents/include/controller/cpp/webots/Camera.hpp \
-  /Applications/Webots.app/Contents/include/controller/cpp/webots/../../c/webots/camera_recognition_object.h
+ C:\Program\ Files\Webots/include/controller/cpp/webots/Robot.hpp \
+ C:\Program\ Files\Webots/include/controller/cpp/webots/Motor.hpp \
+ C:\Program\ Files\Webots/include/controller/cpp/webots/Device.hpp \
+ C:/Program\ Files/Webots/include/controller/c/webots/types.h \
+ C:\Program\ Files\Webots/include/controller/cpp/webots/DistanceSensor.hpp \
+ C:\Program\ Files\Webots/include/controller/cpp/webots/LED.hpp \
+ C:\Program\ Files\Webots/include/controller/cpp/webots/Camera.hpp \
+ C:/Program\ Files/Webots/include/controller/c/webots/camera_recognition_object.h
