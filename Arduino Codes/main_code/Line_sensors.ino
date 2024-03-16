@@ -15,6 +15,7 @@ const uint8_t SensorCount = 16;
 uint16_t sensorValues[SensorCount];
 
 
+
 void line_sensor_setup(){
   // configure the sensors
   line_sensor.setTypeRC();

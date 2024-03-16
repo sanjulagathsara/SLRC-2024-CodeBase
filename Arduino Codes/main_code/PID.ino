@@ -5,6 +5,9 @@
 int prev_error = 0;
 int iVal = 0;
 
+
+
+
 int cal_pid(int err){
   int pVal = err * kp;
   int dVal = (err - prev_error)*kd;

@@ -58,5 +58,45 @@ void move_robot(int left_speed,int right_speed){
 void brake(){
       digitalWrite(INA2,LOW);
       digitalWrite(INB2,LOW);
-      analogWrite(0,0);
+      digitalWrite(INA1,LOW);
+      digitalWrite(INB1,LOW);
+      analogWrite(left_pwm,0);
+      analogWrite(right_pwm,0);
+}
+
+void brake_fast(){
+      digitalWrite(INA2,HIGH);
+      digitalWrite(INB2,HIGH);
+      digitalWrite(INA1,HIGH);
+      digitalWrite(INB1,HIGH);
+      analogWrite(left_pwm,0);
+      analogWrite(right_pwm,0);
+}
+
+void turn_left(){
+    move_robot(-60,60);
+    delay(680);
+    brake_fast();
+}
+
+void turn_right(){
+    move_robot(60,-60);
+    delay(680);
+    brake_fast();
+}
+
+void turn_forward_left(){
+    move_robot(60,60);
+    delay(500);
+    move_robot(-60,60);
+    delay(680);
+    brake_fast();
+}
+
+void turn_forward_right(){
+    move_robot(60,60);
+    delay(500);
+    move_robot(60,-60);
+    delay(680);
+    brake_fast();
 }
