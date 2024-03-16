@@ -100,3 +100,15 @@ void turn_forward_right(){
     delay(500);
     brake_fast();
 }
+
+void turn_right_180(){
+    move_robot(left_base_speed,-right_base_speed);
+    delay(1500);
+    brake_fast();
+}
+
+void turn_left_180(){
+    move_robot(-left_base_speed,right_base_speed);
+    delay(1500);
+    brake_fast();
+}
