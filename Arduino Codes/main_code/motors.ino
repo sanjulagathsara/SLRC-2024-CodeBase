@@ -86,29 +86,29 @@ void turn_right(){
 }
 
 void turn_forward_left(){
-    move_robot(left_base_speed,right_base_speed);
-    delay(300);
-    move_robot(-left_base_speed,right_base_speed);
-    delay(500);
+    move_robot(60,60);
+    delay(400);
+    move_robot(-60,60);
+    delay(600);
     brake_fast();
 }
 
 void turn_forward_right(){
-    move_robot(left_base_speed,right_base_speed);
-    delay(300);
-    move_robot(left_base_speed,-right_base_speed);
-    delay(500);
+    move_robot(60,60);
+    delay(400);
+    move_robot(60,-60);
+    delay(600);
     brake_fast();
 }
 
 void turn_right_180(){
-    move_robot(left_base_speed,-right_base_speed);
-    delay(1500);
+    move_robot(60,-60);
+    delay(1200);
     brake_fast();
 }
 
 void turn_left_180(){
-    move_robot(-left_base_speed,right_base_speed);
-    delay(1500);
+    move_robot(-60,60);
+    delay(1200);
     brake_fast();
 }
