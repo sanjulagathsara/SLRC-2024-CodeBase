@@ -1,3 +1,5 @@
+// This code is for Controlling Motors
+
 #define left_pwm 6
 #define right_pwm 7
 #define EN1 22
@@ -8,7 +10,7 @@
 #define INA2 32
 
 void motor_setup(){
-  pinMode(left_pwm,OUTPUT);
+  pinMode(left_pwm,OUTPUT); // Setting pinModes
   pinMode(right_pwm,OUTPUT);
   pinMode(EN1,OUTPUT);
   pinMode(INB1,OUTPUT);
@@ -17,7 +19,7 @@ void motor_setup(){
   pinMode(INB2,OUTPUT);
   pinMode(INA2,OUTPUT);
 
-  digitalWrite(EN1,HIGH);
+  digitalWrite(EN1,HIGH); // Enabling Motors
   digitalWrite(EN2,HIGH);
 
   digitalWrite(INA1,LOW);
