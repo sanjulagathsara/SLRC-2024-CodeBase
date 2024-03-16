@@ -13,41 +13,50 @@
 #include <iostream>
 
 using namespace webots;
-
 using namespace std;
 
+DistanceSensor *lineSensor[8];
+double lineSensorVal[8];
+
+
+bool lineV[8];
+float pVal;
+float Kp = 5;
+float baseSpeed = 5;
+bool TJuncFlag = 0;
+  
+int junction = 0;
+int error = 0;
+
+void ReadGsensors() { //function for read Ground sensors
+  for (int i = 0; i < 8; i++) { 
+  //AGval[i] = lineSensor[i]->getValue();
+    //std::cout<<"sensor"<<i<<"    "<<AGval[i]<< std::endl;
+  //DGval[i] = 1 - ((AGval[i] - 39) / (116 - 39));
+ // std::cout<<"sensor"<<i<<"    "<<DGval[i]<< std::endl;
+  lineSensorVal[i] = lineSensor[i]->getValue();
+  }
+}
 
 int main(int argc, char **argv) {
 
   // create the Robot instance.
   Robot *robot = new Robot();
-
-
   int timeStep = (int)robot->getBasicTimeStep();
   
-  double lineSensor[8];
-  bool lineV[8];
-  float pVal;
-  float Kp = 5;
-  float baseSpeed = 5;
-  bool TJuncFlag = 0;
-  
-  int junction = 0;
-  
-  int error = 0;
-
 
   Motor *left_motor = robot->getMotor("left_motor");
   Motor *right_motor = robot->getMotor("right_motor");
+
+  char lineSensorNames[8][32] = {"lineSensor0", "lineSensor1", "lineSensor2", "lineSensor3", "lineSensor4", "lineSensor5", "lineSensor6", "lineSensor7"};
   
-  DistanceSensor *lineSensor0 = robot->getDistanceSensor("lineSensor0");
-  DistanceSensor *lineSensor1 = robot->getDistanceSensor("lineSensor1");
-  DistanceSensor *lineSensor2 = robot->getDistanceSensor("lineSensor2");
-  DistanceSensor *lineSensor3 = robot->getDistanceSensor("lineSensor3");
-  DistanceSensor *lineSensor4 = robot->getDistanceSensor("lineSensor4");
-  DistanceSensor *lineSensor5 = robot->getDistanceSensor("lineSensor5");
-  DistanceSensor *lineSensor6 = robot->getDistanceSensor("lineSensor6");
-  DistanceSensor *lineSensor7 = robot->getDistanceSensor("lineSensor7");
+  for (int i = 0; i < 8; i++) {
+    //std::cout << lineSensorNames[i] << std::endl;
+
+    lineSensor[i] = robot->getDistanceSensor(lineSensorNames[i]);
+    lineSensor[i]->enable(timeStep);
+
+  }
   
   Camera *front_color_sensor = robot->getCamera("front_color_sensor");
   
@@ -59,16 +68,7 @@ int main(int argc, char **argv) {
   
   left_motor->setVelocity(-baseSpeed);
   right_motor->setVelocity(-baseSpeed);
-  
-  lineSensor0->enable(timeStep);
-  lineSensor1->enable(timeStep);
-  lineSensor2->enable(timeStep);
-  lineSensor3->enable(timeStep);
-  lineSensor4->enable(timeStep);
-  lineSensor5->enable(timeStep);
-  lineSensor6->enable(timeStep);
-  lineSensor7->enable(timeStep);
-  
+
   front_color_sensor->enable(timeStep);
   
   stoneHolderLED->set(1);
@@ -82,23 +82,13 @@ int main(int argc, char **argv) {
 
   while (robot->step(timeStep) != -1) {
     
-    
-
-    
-    lineSensor[0] = lineSensor0->getValue();
-    lineSensor[1] = lineSensor1->getValue();
-    lineSensor[2] = lineSensor2->getValue();
-    lineSensor[3] = lineSensor3->getValue();
-    lineSensor[4] = lineSensor4->getValue();
-    lineSensor[5] = lineSensor5->getValue();
-    lineSensor[6] = lineSensor6->getValue();
-    lineSensor[7] = lineSensor7->getValue();
+    ReadGsensors();
     
     //cout<<lineSensor[0]<<" "<<lineSensor[1]<<" "<<lineSensor[2]<<" "<<lineSensor[3]<<" "<<lineSensor[4]<<" "<<lineSensor[5]<<" "<<lineSensor[6]<<" "<<lineSensor[7]<<endl;
     
     
     for(int i=0;i<8;i++){
-      if(lineSensor[i] < 500){
+      if(lineSensorVal[i] < 500.00){
         lineV[i] = 1;
       }
       else{
