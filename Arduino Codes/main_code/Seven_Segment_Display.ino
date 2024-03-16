@@ -81,3 +81,49 @@ void showError(int err){
   }
 
 }
+
+void showErrorAndPID(int err,int pid){
+  seven_segment.clearDisplay(0);
+  if(err < 0){
+    seven_segment.setChar(0,7,'-',false);
+    err = -err;
+  }
+  else{
+    seven_segment.setChar(0,7,' ',false);
+  }
+
+  if(err<10){
+    seven_segment.setDigit(0,4,err,false);
+  }
+  else if(err<100){
+    seven_segment.setDigit(0,5,err/10,false);
+    seven_segment.setDigit(0,4,err%10,false);
+  }
+  else if(err<1000){
+    seven_segment.setDigit(0,6,err/100,false);
+    seven_segment.setDigit(0,5,(err/10)%10,false);
+    seven_segment.setDigit(0,4,err%10,false);
+  }
+
+  if(pid < 0){
+    seven_segment.setChar(0,3,'-',false);
+    pid = -pid;
+  }
+  else{
+    seven_segment.setChar(0,3,' ',false);
+  }
+
+  if(pid<10){
+    seven_segment.setDigit(0,0,pid,false);
+  }
+  else if(pid<100){
+    seven_segment.setDigit(0,1,pid/10,false);
+    seven_segment.setDigit(0,0,pid%10,false);
+  }
+  else{
+    seven_segment.setDigit(0,2,pid/100,false);
+    seven_segment.setDigit(0,1,(pid/10)%10,false);
+    seven_segment.setDigit(0,0,pid%10,false);
+  }
+
+}

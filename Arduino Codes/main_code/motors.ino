@@ -86,17 +86,17 @@ void turn_right(){
 }
 
 void turn_forward_left(){
-    move_robot(60,60);
+    move_robot(left_base_speed,right_base_speed);
+    delay(300);
+    move_robot(-left_base_speed,right_base_speed);
     delay(500);
-    move_robot(-60,60);
-    delay(680);
     brake_fast();
 }
 
 void turn_forward_right(){
-    move_robot(60,60);
+    move_robot(left_base_speed,right_base_speed);
+    delay(300);
+    move_robot(left_base_speed,-right_base_speed);
     delay(500);
-    move_robot(60,-60);
-    delay(680);
     brake_fast();
 }
