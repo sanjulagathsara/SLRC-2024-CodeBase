@@ -54,6 +54,10 @@ int cal_line_error(){
     return 5003;
   }
 
+  else if(ir[0] == 0 &&/* ir[1] == 1 && ir[2] == 1 &&*/ ir[3] == 1 && ir[4] == 1 && ir[5] == 1 && ir[6] == 1 && ir[7] == 1 && ir[8] == 1 && ir[9] == 1 && ir[10] == 1 && ir[11] == 1 && ir[12] == 1/* && ir[13] == 0 && ir[14] == 0*/ && ir[15] == 0){
+    return 5004;
+  }
+
   else{
     for (uint8_t i = 0; i < SensorCount; i++)
     {
