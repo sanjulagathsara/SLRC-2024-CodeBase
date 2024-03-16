@@ -1,7 +1,13 @@
 
+#define left_base_speed 60
+#define right_base_speed 60
 
+
+
+// This code block is when starting the robot
 void setup()
 {
+  seven_segment_setup();
   line_sensor_setup();
   motor_setup();
 
@@ -9,14 +15,19 @@ void setup()
   delay(2000);
 }
 
-
+// This code block is when the robot is running
 void loop()
 {
   int err = cal_line_error();
+  
+  int pid = cal_pid(err);
   Serial.print(" Error = ");
-  Serial.println(err);
-  cal_pid();
-  move_robot(60+(err/20),60-(err/20));
+  Serial.print(err);
+  Serial.print(" pid = ");
+  pid = pid/20;
+  Serial.println(pid);
+  showError(pid);
+  move_robot(left_base_speed+pid,right_base_speed-pid);
   delay(50);
 }
 

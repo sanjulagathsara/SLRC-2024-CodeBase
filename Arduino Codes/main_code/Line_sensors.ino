@@ -61,10 +61,10 @@ int cal_line_error(){
   }
 
 
-  if(line_error>1000)
-    line_error = 1000;
-  if(line_error < -1000)
-    line_error = -1000;
+  if(line_error>999)
+    line_error = 999;
+  if(line_error < -999)
+    line_error = -999;
 
   return line_error;
 }
