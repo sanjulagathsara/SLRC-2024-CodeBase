@@ -4,7 +4,7 @@ Code for SLRC 2024
 
 Team : Sanjula Gathsara, Nimeth Menuka, Mineth Banula, Yasantha Niroshan
 
-Every code line is Copyright Protected
+Code Base is Copyright Protected
 
 © 2024 RoboticGen Inc <hello@Roboticgen.lk>
 
@@ -279,6 +279,13 @@ void loop()
         Serial.println(pid);
         showErrorAndPID(var0*10000,err);
         move_robot(left_base_speed+pid+motor_offset/2,right_base_speed-pid-motor_offset/2);
+    }
+
+    else if(robot_state == 170){ // PID Tuning
+
+        encoderForward(100,left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
+        robot_state = 2000;
+
     }
 
     else{
