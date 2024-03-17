@@ -1,6 +1,7 @@
-#define kp 0.4
-#define kd 0.6
-#define ki 0.01
+#define kp 0.13
+#define kd 0.23 //0.3
+#define ki 0.001
+//float ki  = 0; //0.01
 
 
 int prev_error = 0;
@@ -15,7 +16,7 @@ int cal_pid(int err){
   prev_error = err;
   iVal += err * ki;
 
-  if(err != prev_error){
+  if(err != prev_error && err == 0){
     iVal = 0;
   }
   else if(iVal > 50){
@@ -35,4 +36,16 @@ int cal_pid(int err){
   }
 
   return pidVal;
+}
+
+void setkp(float in){
+  //kp = in;
+}
+
+void setkd(float in){
+  //kd = in;
+}
+
+void setki(float in){
+  //ki = in;
 }
