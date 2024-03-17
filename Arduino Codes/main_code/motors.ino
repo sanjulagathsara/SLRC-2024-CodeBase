@@ -76,12 +76,14 @@ void brake_fast(){
 void turn_left(){
     move_robot(-60,60);
     delay(680);
+    //delay(500);
     brake_fast();
 }
 
 void turn_right(){
     move_robot(60,-60);
     delay(680);
+    //delay(500);
     brake_fast();
 }
 
@@ -90,6 +92,7 @@ void turn_forward_left(){
     delay(400);
     move_robot(-60,60);
     delay(600);
+    //delay(500);
     brake_fast();
 }
 
@@ -98,17 +101,20 @@ void turn_forward_right(){
     delay(400);
     move_robot(60,-60);
     delay(600);
+    //delay(500);
     brake_fast();
 }
 
 void turn_right_180(){
     move_robot(60,-60);
-    delay(1200);
+    delay(1400);
+    //delay(1000);
     brake_fast();
 }
 
 void turn_left_180(){
     move_robot(-60,60);
-    delay(1200);
+    delay(1400);
+    //delay(1000);
     brake_fast();
 }

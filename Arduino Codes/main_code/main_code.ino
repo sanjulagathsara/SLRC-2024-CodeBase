@@ -1,6 +1,6 @@
 
-#define left_base_speed 50
-#define right_base_speed 50
+#define left_base_speed 80
+#define right_base_speed 80
 #define motor_offset 8
 
 
@@ -25,7 +25,7 @@ void loop()
 {
 
   if(robot_status == 0){ // Initial State at Start Box
-    move_robot(left_base_speed,right_base_speed);
+    move_robot(left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
     delay(500);
     robot_status = 1;
   }
@@ -67,7 +67,7 @@ void loop()
   else if(robot_status == 2){ // Robot at First Junction
     brake_fast();
     delay(1000);
-    move_robot(left_base_speed,right_base_speed);
+    move_robot(left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
     delay(500);
     robot_status += 1;
   }
@@ -144,7 +144,7 @@ void loop()
   else if(robot_status == 24){ // Robot search metal boxes
   brake_fast();
   delay(1000);
-  move_robot(left_base_speed,right_base_speed);
+  move_robot(left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
   delay(400);
   robot_status += 1;
   }
@@ -173,7 +173,7 @@ void loop()
   else if(robot_status == 32){ // Robot search metal boxes
   brake_fast();
   delay(1000);
-  move_robot(left_base_speed,right_base_speed);
+  move_robot(left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
   delay(400);
   robot_status += 1;
   }
@@ -195,7 +195,7 @@ void loop()
   else if(robot_status == 38){ // Go forward 4 junction
   brake_fast();
   delay(1000);
-  move_robot(left_base_speed,right_base_speed);
+  move_robot(left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
   delay(400);
   robot_status += 1;
   }
@@ -224,7 +224,7 @@ void loop()
   else if(robot_status == 46){ // End
   brake_fast();
   delay(1000);
-  move_robot(left_base_speed,right_base_speed);
+  move_robot(left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
   delay(1000);
   brake();
   beep(5,100);
@@ -232,7 +232,7 @@ void loop()
   }
 
   else if(robot_status == 66){ // Debug go forward
-  move_robot(left_base_speed,right_base_speed);
+  move_robot(left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
   }
   else if(robot_status == 68){ // Debug ir values
       int err = cal_line_error();

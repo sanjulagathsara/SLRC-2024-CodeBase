@@ -20,7 +20,8 @@ bool ir[SensorCount];
 void line_sensor_setup(){
   // configure the sensors
   line_sensor.setTypeRC();
-  line_sensor.setSensorPins((const uint8_t[]){53, 51, 49, 47, 45, 43, 41, 39, 37, 35, 33, 31, 29, 27, 25, 23}, SensorCount);
+  //line_sensor.setSensorPins((const uint8_t[]){53, 51, 49, 47, 45, 43, 41, 39, 37, 35, 33, 31, 29, 27, 25, 23}, SensorCount);
+  line_sensor.setSensorPins((const uint8_t[]){37, 53, 35, 51, 33, 49, 31, 47, 29, 45, 27, 43, 25, 41, 23, 39}, SensorCount);
   line_sensor.setEmitterPin(2);
 
   pinMode(line_even,OUTPUT);
@@ -43,18 +44,18 @@ int cal_line_error(){
     ir[i] = sensorValues[i] < line_threshold;
   }
 
-  if(ir[0] == 1 && ir[1] == 1 && ir[2] == 1 && ir[3] == 1 && ir[4] == 1 && ir[5] == 1 && ir[6] == 1 && ir[7] == 1 &&/* ir[8] == 1 && ir[9] == 0 && ir[10] == 0 && ir[11] == 0 && ir[12] == 0 &&*/ ir[13] == 0 && ir[14] == 0 && ir[15] == 0){
+  if( ir[0] == 1 && ir[1] == 1 && ir[2] == 1 && ir[3] == 1 && ir[4] == 1 && ir[5] == 1 && ir[6] == 1 && ir[7] == 1 &&/* ir[8] == 1 && ir[9] == 0 && ir[10] == 0 && ir[11] == 0 && ir[12] == 0 &&*/ ir[13] == 0 && ir[14] == 0 && ir[15] == 0){
     return 5002;
   }
-  else if(ir[0] == 0 && ir[1] == 0 && ir[2] == 0 &&/* ir[3] == 0 && ir[4] == 0 && ir[5] == 0 && ir[6] == 0 && ir[7] == 1 &&*/ ir[8] == 1 && ir[9] == 1 && ir[10] == 1 && ir[11] == 1 && ir[12] == 1 && ir[13] == 1 && ir[14] == 1 && ir[15] == 1){
+  else if( ir[0] == 0 && ir[1] == 0 && ir[2] == 0 &&/* ir[3] == 0 && ir[4] == 0 && ir[5] == 0 && ir[6] == 0 && ir[7] == 1 &&*/ ir[8] == 1 && ir[9] == 1 && ir[10] == 1 && ir[11] == 1 && ir[12] == 1 && ir[13] == 1 && ir[14] == 1 && ir[15] == 1){
     return 5001;
   }
 
-  else if(ir[0] == 1 && ir[1] == 1 && ir[2] == 1 && ir[3] == 1 && ir[4] == 1 && ir[5] == 1 && ir[6] == 1 && ir[7] == 1 && ir[8] == 1 && ir[9] == 1 && ir[10] == 1 && ir[11] == 1 && ir[12] == 1 && ir[13] == 1 && ir[14] == 1 && ir[15] == 1){
+  else if( ir[0] == 1 && ir[1] == 1 && ir[2] == 1 && ir[3] == 1 && ir[4] == 1 && ir[5] == 1 && ir[6] == 1 && ir[7] == 1 && ir[8] == 1 && ir[9] == 1 && ir[10] == 1 && ir[11] == 1 && ir[12] == 1 && ir[13] == 1 && ir[14] == 1 && ir[15] == 1){
     return 5003;
   }
 
-  else if(ir[0] == 0 &&/* ir[1] == 1 && ir[2] == 1 && ir[3] == 1 && ir[4] == 1 &&*/ ir[5] == 1 && ir[6] == 1 && ir[7] == 1 && ir[8] == 1 && ir[9] == 1 && ir[10] == 1 /*&& ir[11] == 1 && ir[12] == 1 && ir[13] == 0 && ir[14] == 0*/ && ir[15] == 0){
+  else if( ir[0] == 0 &&/* ir[1] == 1 && ir[2] == 1 && ir[3] == 1 && ir[4] == 1 &&*/ ir[5] == 1 && ir[6] == 1 && ir[7] == 1 && ir[8] == 1 && ir[9] == 1 && ir[10] == 1 /*&& ir[11] == 1 && ir[12] == 1 && ir[13] == 0 && ir[14] == 0*/ && ir[15] == 0){
     return 5004;
   }
 
@@ -65,8 +66,8 @@ int cal_line_error(){
 
 
       
-      Serial.print(temp_val);
-      Serial.print("  ");
+      //Serial.print(temp_val);
+      //Serial.print("  ");
       int temp = 0;
 
       if(i <= 7){
