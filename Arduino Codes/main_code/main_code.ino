@@ -27,7 +27,7 @@ void setup()
   line_sensor_setup();
   motor_setup();
   sound_setup();
-  enoder_setup();
+  encoder_setup();
 }
 
 // This code block is when the robot is running

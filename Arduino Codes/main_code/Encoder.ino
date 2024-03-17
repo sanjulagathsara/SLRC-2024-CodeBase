@@ -1,7 +1,7 @@
 #define encoder_L_motor_Y 2
 #define encoder_L_motor_G 3
 #define encoder_R_motor_Y 18
-#define encoder_L_motor_G 19
+#define encoder_R_motor_G 19
 
 #define ticksPerRotation 200
 #define lengthPerRotation 204.2
@@ -22,8 +22,6 @@ void encoder_setup(){
   pinMode(encoder_R_motor_Y,INPUT);
   pinMode(encoder_L_motor_G,INPUT);
 
-  attachInterrupt(digitalPinToInterrupt(encoder_L_motor_Y),leftMotorPulse,RISING);
-  attachInterrupt(digitalPinToInterrupt(encoder_R_motor_Y),rightMotorPulse,RISING);
 
 }
 
@@ -57,12 +55,16 @@ void rightMotorPulse(){
 }
 
 void encoderForward(int length,int leftSpeed,int rightSpeed){
+
+  attachInterrupt(digitalPinToInterrupt(encoder_L_motor_Y),leftMotorPulse,RISING);
+  attachInterrupt(digitalPinToInterrupt(encoder_R_motor_Y),rightMotorPulse,RISING);
+
   countL = 0;
   countR = 0;
 
   long targetCount = (204.2/200)*length;
 
-  moveRobot(leftSpeed,rightSpeed);
+  move_robot(leftSpeed,rightSpeed);
 
   bool LtargetReachFlag = 0;
   bool RtargetReachFlag = 0;
@@ -71,69 +73,98 @@ void encoderForward(int length,int leftSpeed,int rightSpeed){
 
     if(countL >= targetCount){
       LtargetReachFlag = 1;
-      moveRobot(0,rightSpeed);
+      move_robot(0,rightSpeed);
     }
     if(countR >= targetCount){
       RtargetReachFlag = 1;
-      moveRobot(leftSpeed,0);
+      move_robot(leftSpeed,0);
     }
   }
+
+  detachInterrupt(digitalPinToInterrupt(encoder_L_motor_Y));
+  detachInterrupt(digitalPinToInterrupt(encoder_R_motor_Y));
 
 }
 
 void encoderBackward(int length,int leftSpeed,int rightSpeed){
+
+  attachInterrupt(digitalPinToInterrupt(encoder_L_motor_Y),leftMotorPulse,RISING);
+  attachInterrupt(digitalPinToInterrupt(encoder_R_motor_Y),rightMotorPulse,RISING);
+
   countL = 0;
   countR = 0;
 
   long targetCount = (204.2/200)*length;
 
-  moveRobot(leftSpeed,rightSpeed);
+  move_robot(leftSpeed,rightSpeed);
 
   bool LtargetReachFlag = 0;
   bool RtargetReachFlag = 0;
 
   while(!(LtargetReachFlag == 1 && RtargetReachFlag == 1)){
 
-    if(countL <= targetCount){
+    if(countL <= -targetCount){
       LtargetReachFlag = 1;
     }
-    if(countR <= targetCount){
+    if(countR <= -targetCount){
       RtargetReachFlag = 1;
     }
+
   }
-
-void encoderTurnLeft(int angle,int leftSpeed,int rightSpeed){
-  countL = 0;
-  countR = 0;
-
-  long targetCount = ticksPerDegree*angle;
-
-  moveRobot(leftSpeed,rightSpeed);
-
-  bool LtargetReachFlag = 0;
-  bool RtargetReachFlag = 0;
-
-  while(!(LtargetReachFlag == 1 && RtargetReachFlag == 1)){
-
-    if(countL <= targetCount){
-      LtargetReachFlag = 1;
-      moveRobot(0,rightSpeed);
-    }
-    if(countR >= targetCount){
-      RtargetReachFlag = 1;
-      moveRobot(leftSpeed,0);
-    }
-  }
+  detachInterrupt(digitalPinToInterrupt(encoder_L_motor_Y));
+  detachInterrupt(digitalPinToInterrupt(encoder_R_motor_Y));
 
 }
 
-void encoderTurnRight(int angle,int leftSpeed,int rightSpeed){
+
+
+void encoderTurnLeft(int angle,int leftSpeed,int rightSpeed){
+
+  attachInterrupt(digitalPinToInterrupt(encoder_L_motor_Y),leftMotorPulse,RISING);
+  attachInterrupt(digitalPinToInterrupt(encoder_R_motor_Y),rightMotorPulse,RISING);
+
   countL = 0;
   countR = 0;
 
   long targetCount = ticksPerDegree*angle;
 
-  moveRobot(leftSpeed,rightSpeed);
+  move_robot(leftSpeed,rightSpeed);
+
+  bool LtargetReachFlag = 0;
+  bool RtargetReachFlag = 0;
+
+  while(!(LtargetReachFlag == 1 && RtargetReachFlag == 1)){
+
+    if(countL <= -targetCount){
+      LtargetReachFlag = 1;
+      move_robot(0,rightSpeed);
+    }
+    if(countR >= targetCount){
+      RtargetReachFlag = 1;
+      move_robot(leftSpeed,0);
+    }
+  }
+
+  detachInterrupt(digitalPinToInterrupt(encoder_L_motor_Y));
+  detachInterrupt(digitalPinToInterrupt(encoder_R_motor_Y));
+
+}
+
+
+
+
+void encoderTurnRight(int angle,int leftSpeed,int rightSpeed){
+
+
+  attachInterrupt(digitalPinToInterrupt(encoder_L_motor_Y),leftMotorPulse,RISING);
+  attachInterrupt(digitalPinToInterrupt(encoder_R_motor_Y),rightMotorPulse,RISING);
+
+  countL = 0;
+  countR = 0;
+
+  long targetCount = ticksPerDegree*angle;
+
+  move_robot(leftSpeed,rightSpeed);
 
   bool LtargetReachFlag = 0;
   bool RtargetReachFlag = 0;
@@ -142,13 +173,16 @@ void encoderTurnRight(int angle,int leftSpeed,int rightSpeed){
 
     if(countL >= targetCount){
       LtargetReachFlag = 1;
-      moveRobot(0,rightSpeed);
+      move_robot(0,rightSpeed);
     }
-    if(countR <= targetCount){
+    if(countR <= -targetCount){
       RtargetReachFlag = 1;
-      moveRobot(leftSpeed,0);
+      move_robot(leftSpeed,0);
     }
   }
+
+  detachInterrupt(digitalPinToInterrupt(encoder_L_motor_Y));
+  detachInterrupt(digitalPinToInterrupt(encoder_R_motor_Y));
 
 }
 
