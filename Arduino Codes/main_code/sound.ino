@@ -1,6 +1,6 @@
 #define buzzer 13
 
-void setup_sound(){
+void sound_setup(){
   pinMode(buzzer,OUTPUT);
   beep(4,100);
 }
