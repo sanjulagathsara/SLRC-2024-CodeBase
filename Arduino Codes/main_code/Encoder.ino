@@ -134,10 +134,10 @@ void encoderBackward(int length,int leftSpeed,int rightSpeed){
 
   while(!(LtargetReachFlag == 1 && RtargetReachFlag == 1)){
 
-    Serial.print("Left = ");
-    Serial.print(countL);
-    Serial.print(" Right = ");
-    Serial.print(countR);
+    //Serial.print("Left = ");
+    //Serial.print(countL);
+    //Serial.print(" Right = ");
+    //Serial.print(countR);
 
     if(countL <= -targetCount && LtargetReachFlag == 0){
       LtargetReachFlag = 1;

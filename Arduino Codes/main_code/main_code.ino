@@ -28,6 +28,7 @@ void setup()
   motor_setup();
   sound_setup();
   encoder_setup();
+  ultrasonic_setup();
 }
 
 // This code block is when the robot is running
@@ -41,7 +42,7 @@ void loop()
   }
 
 
-  else if(robot_state%2 == 1){ // Robot at Line Segments
+  else if(robot_state%2 == 1 && robot_state != 3){ // Robot at Line Segments
   
   
     int err = cal_line_error();
@@ -83,6 +84,42 @@ void loop()
       robot_state += 1;
     }
 
+    else if(robot_state == 3){
+      int err = cal_line_error();
+
+      while(getFrontDistance() >= 10){
+
+      if(err  <= 5000){
+        
+        int pid = cal_pid(err);
+        Serial.print(" Error = ");
+        Serial.print(err);
+        Serial.print(" pid = ");
+        Serial.println(pid);
+        showErrorAndPID(pid,robot_state);
+        move_robot(left_base_speed+pid+motor_offset/2,right_base_speed-pid-motor_offset/2);
+      }
+      else if(err == 5001){ // Junction to right
+        beep(2,20);
+        robot_state += 1;
+      }
+      else if(err == 5002){ // Junction to left
+        beep(1,20);
+        robot_state += 1;
+      }
+      else if(err == 5003){ // T junction
+        beep(3,20);
+        robot_state += 1; 
+
+      }
+    }
+
+    brake_fast();
+    beep(3,100);
+    delay(2000);
+
+  }
+
 
     else if(robot_state == 4){ // Robot at First Gem Holder
     brake_fast();
@@ -91,6 +128,7 @@ void loop()
     encoderTurnLeft(180,-left_base_speed,right_base_speed);
     robot_state += 1;
     }
+
 
     else if(robot_state == 6){ // Robot at First Junction Second Time
     brake_fast();
@@ -316,6 +354,12 @@ void loop()
         }
         
         robot_state = 2000;
+
+    }
+
+    else if(robot_state == 200){ // Ultrasonic Get values
+
+        getFrontDistance();
 
     }
     else{
