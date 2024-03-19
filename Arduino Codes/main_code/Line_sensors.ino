@@ -2,8 +2,28 @@
 
 #include <QTRSensors.h>
 
+
+//Pins
 #define line_even 34
 #define line_odd 36
+
+#define ir0 23
+#define ir1 25
+#define ir2 27
+#define ir3 29
+#define ir4 31
+#define ir5 33
+#define ir6 35
+#define ir7 37
+#define ir8 39
+#define ir9 41
+#define ir10 43
+#define ir11 45
+#define ir12 47
+#define ir13 49
+#define ir14 51
+#define ir15 53
+
 #define line_threshold 2400
 
 QTRSensors line_sensor;
@@ -18,9 +38,10 @@ void line_sensor_setup(){
 
   // configure the sensors
   line_sensor.setTypeRC();
-  
+
   //line_sensor.setSensorPins((const uint8_t[]){53, 51, 49, 47, 45, 43, 41, 39, 37, 35, 33, 31, 29, 27, 25, 23}, SensorCount);
-  line_sensor.setSensorPins((const uint8_t[]){37, 53, 35, 51, 33, 49, 31, 47, 29, 45, 27, 43, 25, 41, 23, 39}, SensorCount);
+  //line_sensor.setSensorPins((const uint8_t[]){37, 53, 35, 51, 33, 49, 31, 47, 29, 45, 27, 43, 25, 41, 23, 39}, SensorCount);
+  line_sensor.setSensorPins((const uint8_t[]){ir15, ir14, ir13, ir12, ir11, ir10, ir9, ir8, ir7, ir6, ir5, ir4, ir3, ir2, ir1, ir0}, SensorCount);
   line_sensor.setEmitterPin(2);
 
   pinMode(line_even,OUTPUT);

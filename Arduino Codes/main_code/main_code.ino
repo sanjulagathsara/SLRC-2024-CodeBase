@@ -15,7 +15,7 @@ Code Base is Copyright Protected
 #define motor_offset 8
 
 //This variable handles the Main State Change of the Robot
-int robot_state = 0;
+int robot_state = 180;
 
 
 // This code block is when starting the robot
@@ -281,13 +281,12 @@ void loop()
         move_robot(left_base_speed+pid+motor_offset/2,right_base_speed-pid-motor_offset/2);
     }
 
-    else if(robot_state == 170){ // PID Tuning
+    else if(robot_state == 170){ // Encoder forward
 
         encoderForward(100,left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
         robot_state = 2000;
 
     }
-
     else{
       beep(5,100);
       brake();

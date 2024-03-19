@@ -1,7 +1,8 @@
-#define encoder_L_motor_Y 2
-#define encoder_L_motor_G 3
-#define encoder_R_motor_Y 18
-#define encoder_R_motor_G 19
+//pins
+#define encoder_L_motor_Y 18
+#define encoder_L_motor_G 19
+#define encoder_R_motor_Y 2
+#define encoder_R_motor_G 3
 
 #define ticksPerRotation 200
 #define lengthPerRotation 204.2
