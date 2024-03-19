@@ -1,3 +1,4 @@
+//pins
 #define buzzer 13
 
 void sound_setup(){

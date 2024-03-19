@@ -1,6 +1,12 @@
 #include "LedControl.h"
 
-LedControl seven_segment=LedControl(12,11,10,1);
+//pins
+#define DataIn 12
+#define CLK 11
+#define LOAD 10
+
+
+LedControl seven_segment=LedControl(DataIn,CLK,LOAD,1);
 
 /*
 

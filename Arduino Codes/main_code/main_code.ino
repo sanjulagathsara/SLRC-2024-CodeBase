@@ -12,7 +12,7 @@ Code Base is Copyright Protected
 
 #define left_base_speed 80
 #define right_base_speed 80
-#define motor_offset 8
+#define motor_offset 6
 
 //This variable handles the Main State Change of the Robot
 int robot_state = 0;
@@ -28,6 +28,7 @@ void setup()
   motor_setup();
   sound_setup();
   encoder_setup();
+  ultrasonic_setup();
 }
 
 // This code block is when the robot is running
@@ -41,7 +42,7 @@ void loop()
   }
 
 
-  else if(robot_state%2 == 1){ // Robot at Line Segments
+  else if(robot_state%2 == 1 && robot_state != 3){ // Robot at Line Segments
   
   
     int err = cal_line_error();
@@ -83,74 +84,112 @@ void loop()
       robot_state += 1;
     }
 
+    else if(robot_state == 3){
+      int err = cal_line_error();
+
+      while(getFrontDistance() >= 10){
+
+      if(err  <= 5000){
+        
+        int pid = cal_pid(err);
+        Serial.print(" Error = ");
+        Serial.print(err);
+        Serial.print(" pid = ");
+        Serial.println(pid);
+        showErrorAndPID(pid,robot_state);
+        move_robot(left_base_speed+pid+motor_offset/2,right_base_speed-pid-motor_offset/2);
+      }
+      else if(err == 5001){ // Junction to right
+        beep(2,20);
+        robot_state += 1;
+      }
+      else if(err == 5002){ // Junction to left
+        beep(1,20);
+        robot_state += 1;
+      }
+      else if(err == 5003){ // T junction
+        beep(3,20);
+        robot_state += 1; 
+
+      }
+    }
+
+    brake_fast();
+    beep(3,100);
+    delay(2000);
+
+  }
+
 
     else if(robot_state == 4){ // Robot at First Gem Holder
     brake_fast();
     delay(1000);
-    turn_left_180();
+    encoderBackward(50,-left_base_speed,-right_base_speed);
+    encoderTurnLeft(180,-left_base_speed,right_base_speed);
     robot_state += 1;
     }
+
 
     else if(robot_state == 6){ // Robot at First Junction Second Time
     brake_fast();
     delay(1000);
-    turn_forward_right();
+    encoderForwardRight(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 8){ 
     brake_fast();
     delay(1000);
-    turn_forward_right();
+    encoderForwardRight(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 10){ 
     brake_fast();
     delay(1000);
-    turn_forward_left();
+    encoderForwardLeft(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 12){ // Robot at colour round
     brake_fast();
     delay(1000);
-    turn_forward_left();
+    encoderForwardLeft(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 14){ // Robot at junction before circle
     brake_fast();
     delay(1000);
-    turn_forward_right();
+    encoderForwardRight(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 16){ // Robot Entering Circle
     brake_fast();
     delay(1000);
-    turn_forward_right();
+    encoderForwardRight(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 18){ // Robot Departing Circle
     brake_fast();
     delay(1000);
-    turn_forward_right();
+    encoderForwardRight(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 20){ // Robot Departing Circle junction
     brake_fast();
     delay(1000);
-    turn_forward_left();
+    encoderForwardLeft(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 22){ // Robot Colour Circle to metal boxes
     brake_fast();
     delay(1000);
-    turn_forward_left();
+    encoderForwardLeft(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
@@ -165,21 +204,21 @@ void loop()
     else if(robot_state == 26){ // Robot search metal boxes
     brake_fast();
     delay(1000);
-    turn_left_180();
+    encoderTurnLeft(180,-left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 28){ // Robot search metal boxes
     brake_fast();
     delay(1000);
-    turn_forward_right();
+    encoderForwardRight(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 30){ // Robot search metal boxes
     brake_fast();
     delay(1000);
-    turn_left_180();
+    encoderTurnLeft(180,-left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
@@ -194,14 +233,14 @@ void loop()
     else if(robot_state == 34){ // Robot search metal boxes
     brake_fast();
     delay(1000);
-    turn_right_180();
+    encoderTurnRight(180,left_base_speed,-right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 36){ // Robot search metal boxes
     brake_fast();
     delay(1000);
-    turn_forward_left();
+    encoderForwardLeft(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
@@ -216,21 +255,21 @@ void loop()
     else if(robot_state == 40){ // Robot left to put the box
     brake_fast();
     delay(1000);
-    turn_forward_left();
+    encoderForwardLeft(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 42){ // Putting down metal box
     brake_fast();
     delay(1000);
-    turn_right_180();
+    encoderTurnRight(180,left_base_speed,-right_base_speed);
     robot_state += 1;
     }
 
     else if(robot_state == 44){ // Robot left to put the box
     brake_fast();
     delay(1000);
-    turn_forward_left();
+    encoderForwardLeft(left_base_speed,right_base_speed);
     robot_state += 1;
     }
 
@@ -254,6 +293,8 @@ void loop()
 
     else if(robot_state == 166){ // Debug go forward
     move_robot(left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
+    delay(2000);
+    brake();
     }
     else if(robot_state == 168){ // Debug ir values
         int err = cal_line_error();
@@ -281,13 +322,46 @@ void loop()
         move_robot(left_base_speed+pid+motor_offset/2,right_base_speed-pid-motor_offset/2);
     }
 
-    else if(robot_state == 170){ // PID Tuning
+    else if(robot_state == 180){ // Encoder forward
 
-        encoderForward(100,left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
+        encoderForward(200,left_base_speed,right_base_speed);
+        robot_state = 2000;
+
+    }
+    else if(robot_state == 182){ // Encoder Backward
+
+        encoderBackward(200,-left_base_speed,-right_base_speed);
         robot_state = 2000;
 
     }
 
+    else if(robot_state == 190){ // Encoder Turn
+
+        for(int i=0;i<4;i++){
+        encoderTurnRight(90,left_base_speed+motor_offset/2,-(right_base_speed-motor_offset/2));
+        delay(1000);
+        }
+        
+        robot_state = 2000;
+
+    }
+
+    else if(robot_state == 192){ // Encoder Turn
+
+        for(int i=0;i<4;i++){
+        encoderTurnLeft(90,-(left_base_speed+motor_offset/2),(right_base_speed-motor_offset/2));
+        delay(1000);
+        }
+        
+        robot_state = 2000;
+
+    }
+
+    else if(robot_state == 200){ // Ultrasonic Get values
+
+        getFrontDistance();
+
+    }
     else{
       beep(5,100);
       brake();

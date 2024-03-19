@@ -1,5 +1,6 @@
 // This code is for Controlling Motors
 
+//Pins
 #define left_pwm 6
 #define right_pwm 7
 #define EN1 22
