@@ -6,7 +6,7 @@ Team : Sanjula Gathsara, Nimeth Menuka, Mineth Banula, Yasantha Niroshan
 
 Code Base is Copyright Protected
 
-© 2024 RoboticGen Inc <hello@Roboticgen.lk>
+© 2024 RoboticGen Inc <hello@Roboticgen.co>
 
 */
 
