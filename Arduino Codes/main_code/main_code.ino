@@ -16,6 +16,7 @@ Code Base is Copyright Protected
 
 //This variable handles the Main State Change of the Robot
 int robot_state = 0;
+bool gemHolderColor = 0; // Green - 0 Blue - 1
 
 
 // This code block is when starting the robot
@@ -29,6 +30,7 @@ void setup()
   sound_setup();
   encoder_setup();
   ultrasonic_setup();
+  LED_setup();
 }
 
 // This code block is when the robot is running
@@ -87,7 +89,7 @@ void loop()
     else if(robot_state == 3){
       int err = cal_line_error();
 
-      while(getFrontDistance() >= 10){
+      while(getFrontDistance() >= 8){
 
       if(err  <= 5000){
         
@@ -114,9 +116,30 @@ void loop()
       }
     }
 
+    
+
     brake_fast();
     beep(3,100);
-    delay(2000);
+
+    delay(500);
+
+    int red = getFrontRed();
+    int green = getFrontGreen();
+    int blue = getFrontBlue();
+    
+
+    if(green > blue){
+      gemHolderColor = 0;
+      Serial.println("Green Color Found");
+      set_led_color(0);
+    }
+    else{
+      gemHolderColor = 1;
+      Serial.println("Blue Color Found");
+      set_led_color(1);
+    }
+    delay(100);
+    robot_state += 1;
 
   }
 
@@ -124,7 +147,7 @@ void loop()
     else if(robot_state == 4){ // Robot at First Gem Holder
     brake_fast();
     delay(1000);
-    encoderBackward(50,-left_base_speed,-right_base_speed);
+    encoderBackward(30,-left_base_speed,-right_base_speed);
     encoderTurnLeft(180,-left_base_speed,right_base_speed);
     robot_state += 1;
     }
@@ -276,8 +299,7 @@ void loop()
     else if(robot_state == 46){ // End
     brake_fast();
     delay(1000);
-    move_robot(left_base_speed+motor_offset/2,right_base_speed-motor_offset/2);
-    delay(1000);
+    encoderForward(200,left_base_speed,right_base_speed);
     brake();
     beep(5,100);
     while(true){}
