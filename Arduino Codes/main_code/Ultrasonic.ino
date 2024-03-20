@@ -18,7 +18,6 @@ int getFrontDistance(){
 
   Serial.print("Distance: ");
   Serial.println(distance);
-  delay(100);
 
   return distance; 
 }

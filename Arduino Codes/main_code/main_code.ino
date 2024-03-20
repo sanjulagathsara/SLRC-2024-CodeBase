@@ -89,7 +89,7 @@ void loop()
     else if(robot_state == 3){
       int err = cal_line_error();
 
-      while(getFrontDistance() >= 10){
+      while(getFrontDistance() >= 8){
 
       if(err  <= 5000){
         
@@ -99,7 +99,7 @@ void loop()
         Serial.print(" pid = ");
         Serial.println(pid);
         showErrorAndPID(pid,robot_state);
-        move_robot(left_base_speed+pid-10+motor_offset/2,right_base_speed-pid-10-motor_offset/2);
+        move_robot(left_base_speed+pid+motor_offset/2,right_base_speed-pid-motor_offset/2);
       }
       else if(err == 5001){ // Junction to right
         beep(2,20);
@@ -147,7 +147,7 @@ void loop()
     else if(robot_state == 4){ // Robot at First Gem Holder
     brake_fast();
     delay(1000);
-    encoderBackward(50,-left_base_speed,-right_base_speed);
+    encoderBackward(30,-left_base_speed,-right_base_speed);
     encoderTurnLeft(180,-left_base_speed,right_base_speed);
     robot_state += 1;
     }
