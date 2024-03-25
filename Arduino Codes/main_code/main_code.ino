@@ -10,8 +10,8 @@ Code Base is Copyright Protected
 
 */
 
-#define left_base_speed 80
-#define right_base_speed 80
+#define left_base_speed 82
+#define right_base_speed 82
 #define motor_offset 6
 
 //This variable handles the Main State Change of the Robot
@@ -24,6 +24,7 @@ void setup()
 {
   Serial.begin(9600); // Beginning Serial Communication
   Serial.println("Robot is Starting : Team RoboticGen - SLRC 2024"); 
+  servo_setup();
   seven_segment_setup();
   line_sensor_setup();
   motor_setup();
@@ -44,7 +45,7 @@ void loop()
   }
 
 
-  else if(robot_state%2 == 1 && robot_state != 3){ // Robot at Line Segments
+  else if(robot_state%2 == 1 /*&& robot_state != 3*/){ // Robot at Line Segments
   
   
     int err = cal_line_error();
@@ -89,7 +90,10 @@ void loop()
     else if(robot_state == 3){
       int err = cal_line_error();
 
-      while(getFrontDistance() >= 8){
+      
+      
+
+      while(getFrontDistance() >= 8 || true){
 
       if(err  <= 5000){
         
@@ -104,19 +108,24 @@ void loop()
       else if(err == 5001){ // Junction to right
         beep(2,20);
         robot_state += 1;
+        break;
       }
       else if(err == 5002){ // Junction to left
         beep(1,20);
         robot_state += 1;
+        break;
       }
       else if(err == 5003){ // T junction
         beep(3,20);
         robot_state += 1; 
+        break;
 
       }
     }
 
     
+
+
 
     brake_fast();
     beep(3,100);
@@ -146,9 +155,31 @@ void loop()
 
     else if(robot_state == 4){ // Robot at First Gem Holder
     brake_fast();
-    delay(1000);
+    beep(3,100);
+
+    delay(500);
+
+    int red = getFrontRed();
+    int green = getFrontGreen();
+    int blue = getFrontBlue();
+    
+
+    if(green > blue){
+      gemHolderColor = 0;
+      Serial.println("Green Color Found");
+      set_led_color(0);
+    }
+    else{
+      gemHolderColor = 1;
+      Serial.println("Blue Color Found");
+      set_led_color(1);
+    }
+
+    delay(500);
+    led_off();
+
     encoderBackward(30,-left_base_speed,-right_base_speed);
-    encoderTurnLeft(180,-left_base_speed,right_base_speed);
+    encoderTurnRight(180,left_base_speed,-right_base_speed);
     robot_state += 1;
     }
 
@@ -169,6 +200,7 @@ void loop()
 
     else if(robot_state == 10){ 
     brake_fast();
+    liftDown();
     delay(1000);
     encoderForwardLeft(left_base_speed,right_base_speed);
     robot_state += 1;
@@ -177,6 +209,7 @@ void loop()
     else if(robot_state == 12){ // Robot at colour round
     brake_fast();
     delay(1000);
+    liftUp();
     encoderForwardLeft(left_base_speed,right_base_speed);
     robot_state += 1;
     }
@@ -197,8 +230,12 @@ void loop()
 
     else if(robot_state == 18){ // Robot Departing Circle
     brake_fast();
+    set_led_color(1);
     delay(1000);
     encoderForwardRight(left_base_speed,right_base_speed);
+    brake();
+    encoderTurnLeft(20,-left_base_speed,right_base_speed);
+    delay(1000);
     robot_state += 1;
     }
 
@@ -224,9 +261,14 @@ void loop()
     robot_state += 1;
     }
 
-    else if(robot_state == 26){ // Robot search metal boxes
+    else if(robot_state == 26){ // Robot search metal boxes // First box
     brake_fast();
+    encoderBackward(80,-left_base_speed,-right_base_speed);
+    liftDown();
     delay(1000);
+    jawClose();
+    delay(1000);
+    liftUp();
     encoderTurnLeft(180,-left_base_speed,right_base_speed);
     robot_state += 1;
     }
@@ -325,22 +367,22 @@ void loop()
     }
 
     else if(robot_state == 170){ // PID Tuning
-        int analogIn0 = analogRead(A1);
+        //int analogIn0 = analogRead(A1);
         //int analogIn1 = analogRead(A0);
-        float var0 = analogIn0/10000.0;
+        //float var0 = analogIn0/10000.0;
         //float var1 = analogIn1/500.0;
         //setkp(var0);
         //setkd(var1);
         //setki(var0);
-        Serial.print(" pot = ");
-        Serial.print(var0);
+        //Serial.print(" pot = ");
+        //Serial.print(var0);
         int err = cal_line_error();
         int pid = cal_pid(err);
         Serial.print(" Error = ");
         Serial.print(err);
         Serial.print(" pid = ");
         Serial.println(pid);
-        showErrorAndPID(var0*10000,err);
+        //showErrorAndPID(var0*10000,err);
         move_robot(left_base_speed+pid+motor_offset/2,right_base_speed-pid-motor_offset/2);
     }
 

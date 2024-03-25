@@ -1,5 +1,5 @@
 //pins
-#define buzzer 13
+#define buzzer 5
 
 void sound_setup(){
   pinMode(buzzer,OUTPUT);
@@ -9,9 +9,9 @@ void sound_setup(){
 void beep(int count,int delay1){
 
   for(int i =0;i<count;i++){
-    digitalWrite(buzzer,HIGH);
-    delay(delay1);
     digitalWrite(buzzer,LOW);
+    delay(delay1);
+    digitalWrite(buzzer,HIGH);
     delay(delay1);
   }
 }

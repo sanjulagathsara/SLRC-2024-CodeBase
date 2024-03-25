@@ -28,3 +28,8 @@ void error_blink(int count){
     digitalWrite(blue_led,HIGH);
   }
 }
+
+void led_off(){
+  digitalWrite(green_led,HIGH);
+  digitalWrite(blue_led,HIGH);
+}
