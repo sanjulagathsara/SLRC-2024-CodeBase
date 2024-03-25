@@ -1,6 +1,6 @@
 //pins
-#define encoder_L_motor_Y 18
-#define encoder_L_motor_G 19
+#define encoder_L_motor_Y 19
+#define encoder_L_motor_G 18
 #define encoder_R_motor_Y 2
 #define encoder_R_motor_G 3
 

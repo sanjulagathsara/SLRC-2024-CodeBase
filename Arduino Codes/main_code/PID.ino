@@ -1,4 +1,4 @@
-#define kp 0.13
+#define kp 0.13 //0.13
 #define kd 0.23 //0.3
 #define ki 0.001
 //float ki  = 0; //0.01
